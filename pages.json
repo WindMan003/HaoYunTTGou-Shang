@@ -1,0 +1,256 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path" : "pages/updata/updata",
+			"style" : {
+				"navigationBarTitleText": ""
+			}
+		},{
+		    "path" : "pages/login/login-choose",
+		    "style" : {
+				"navigationBarTitleText": "登录入口选择"
+			}
+		},{
+			"path" : "pages/login/login",
+			"style" : {
+				"navigationBarTitleText": "商家登录"
+			}
+		},{
+			"path" : "pages/login/login-employee",
+			"style" : {
+				"navigationBarTitleText": "员工登录"
+			}
+		},{
+			"path": "pages/index/index",
+			"style": {
+				"navigationBarTitleText": ""
+			}
+		},{
+            "path" : "pages/my/my",
+            "style": {}
+        },{
+            "path" : "pages/class/class",
+            "style" : {}
+        },{
+            "path" : "pages/newadd-goods/newadd-goods",
+            "style" : {
+				"navigationBarTitleText": "新增产品"
+			}
+        },{
+            "path" : "pages/newadd-goods/change-goods",
+            "style" : {
+				"navigationBarTitleText": "修改产品"
+			}
+        },{
+            "path" : "pages/order/order",
+            "style" : {
+				"navigationBarTitleText": "用户订单"
+			}
+        },{
+		    "path" : "pages/order/order-employee",
+		    "style" : {
+				"navigationBarTitleText": "用户订单"
+			}
+		},{
+            "path" : "pages/order/order-detail",
+            "style" : {
+				"navigationBarTitleText": "订单详情"
+			}
+        },{
+            "path" : "pages/merchant/merchant",
+            "style" : {
+				"navigationBarTitleText": "店铺信息"
+			}
+        },{
+            "path" : "pages/merchant/merchant-change",
+            "style" : {
+				"navigationBarTitleText": "修改店铺信息"
+			}
+        },{
+            "path" : "pages/register/register",
+            "style" : {
+				"navigationBarTitleText": "注册"
+			}
+        },{
+            "path" : "pages/table-qrcode/table-qrcode",
+            "style" : {
+				"navigationBarTitleText": "桌子二维码"
+			}
+        },{
+            "path" : "pages/notice/notice",
+            "style" : {
+				"navigationBarTitleText": "公告"
+			}
+        },{
+            "path" : "pages/notice/notice-info",
+            "style" : {
+				"navigationBarTitleText": "新增公告"
+			}
+        },{
+            "path" : "pages/notice/notice-info-change",
+            "style" : {
+				"navigationBarTitleText": "修改公告"
+			}
+        },{
+            "path" : "pages/employee/employee",
+            "style" : {
+				"navigationBarTitleText": "员工管理"
+			}
+        },{
+            "path" : "pages/status-configuration/status-configuration",
+            "style" : {
+				"navigationBarTitleText": "状态控制"
+			}
+        }
+		,{
+            "path" : "pages/set/set",
+            "style" : {
+            	"navigationBarTitleText": "用户设置"
+            }
+        },{
+            "path" : "pages/take/take",
+            "style" : {
+            	"navigationBarTitleText": "余额"
+            }
+        },{
+            "path" : "pages/take/take-setPassword",
+            "style" : {
+            	"navigationBarTitleText": "设置提现密码"
+            }
+        },{
+            "path" : "pages/take/take-findPassword",
+            "style" : {
+            	"navigationBarTitleText": "找回提现密码"
+            }
+        },{
+            "path" : "pages/take/take-account",
+            "style" : {
+            	"navigationBarTitleText": "提现账号"
+            }
+        },{
+            "path" : "pages/take/take-bindAccount",
+            "style" : {
+            	"navigationBarTitleText": "绑定提现账号"
+            }
+        },{
+            "path" : "pages/take/take-info",
+            "style" : {
+            	"navigationBarTitleText": "提现"
+            }
+        },{
+            "path" : "pages/take/take-modifyPassword",
+            "style" : {
+            	"navigationBarTitleText": "修改提现密码"
+            }
+        },{
+            "path" : "pages/take/take-account-info",
+            "style" : {
+            	"navigationBarTitleText": "提现账号信息"
+            }
+        },{
+		    "path" : "pages/take/take-list",
+		    "style" : {
+		    	"navigationBarTitleText": "提现列表"
+		    }
+		},{
+		    "path" : "pages/take/take-list-info",
+		    "style" : {
+		    	"navigationBarTitleText": "提现明细"
+		    }
+		},{
+            "path" : "pages/set/modify-password",
+            "style" : {
+				"navigationBarTitleText": "修改登录密码"
+			}
+        },{
+            "path" : "pages/set/find-password",
+            "style" : {
+				"navigationBarTitleText": "找回登录密码"
+			}
+        },{
+            "path" : "pages/set/change-mobilephone",
+            "style" : {
+				"navigationBarTitleText": "更换手机号"
+			}
+        },{
+            "path" : "pages/question/question",
+            "style" : {
+				"navigationBarTitleText": "问题反馈列表"
+			}
+        },{
+            "path" : "pages/question/question-create",
+            "style" : {
+				"navigationBarTitleText": "问题反馈"
+			}
+        },{
+            "path" : "pages/question/question-info",
+            "style" : {
+				"navigationBarTitleText": "反馈内容"
+			}
+        },{
+            "path" : "pages/webview/webview",
+            "style" : {
+				
+			}
+        },{
+            "path" : "pages/prize/prize",
+            "style" : {
+				"navigationBarTitleText": "抽奖活动"
+			}
+        },{
+            "path" : "pages/prize/prize-add",
+            "style" : {
+				"navigationBarTitleText": "添加奖品"
+			}
+        },{
+            "path" : "pages/prize/prize-info",
+            "style" : {
+				"navigationBarTitleText": "奖品详情"
+			}
+        }
+        ,{
+            "path" : "pages/bleConnect/bleConnect",
+            "style" : {
+				"navigationBarTitleText": "蓝牙设备连接"
+			}
+        }
+    ],
+	"globalStyle": {
+		"navigationBarTextStyle": "black",
+		"navigationBarTitleText": "",
+		"navigationBarBackgroundColor": "#FFFFFF",
+		"backgroundColor": "#FFFFFF"
+	},
+	"tabBar" : {
+		"color" : "#B5B5B5",
+		"selectedColor" : "#FD6801",
+		"borderStyle" : "black",
+		"backgroundColor" : "#FFFFFF",
+		"list" : [
+			{
+				"pagePath":"pages/index/index",
+				"text":"首页",
+				"iconPath":"static/tabbar/index.png",
+				"selectedIconPath":"static/tabbar/indexSelected.png"
+			},
+			{
+				"pagePath":"pages/order/order",
+				"text":"订单",
+				"iconPath":"static/tabbar/order.png",
+				"selectedIconPath":"static/tabbar/orderSelected.png"
+			},
+			// {
+			// 	"pagePath":"pages/prize/prize",
+			// 	"text":"抽奖",
+			// 	"iconPath":"static/tabbar/order.png",
+			// 	"selectedIconPath":"static/tabbar/orderSelected.png"
+			// },
+			{
+				"pagePath":"pages/my/my",
+				"text":"我的",
+				"iconPath":"static/tabbar/my.png",
+				"selectedIconPath":"static/tabbar/mySelected.png"
+			}
+		]
+	}
+}

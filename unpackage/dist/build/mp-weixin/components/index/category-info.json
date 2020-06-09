@@ -1,0 +1,8 @@
+{
+  "component": true,
+  "usingComponents": {
+    "uni-icons": "/components/uni-icons/uni-icons",
+    "newadd-popup": "/components/popup/newadd-popup",
+    "category-info-item": "/components/item/category-info-item"
+  }
+}

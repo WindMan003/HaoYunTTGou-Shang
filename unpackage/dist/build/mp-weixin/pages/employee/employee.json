@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "newadd-popup": "/components/employee/newadd-popup",
+    "change-popup": "/components/employee/change-popup"
+  }
+}

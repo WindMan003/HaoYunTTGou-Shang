@@ -1,0 +1,36 @@
+
+/* 通用样式 */
+
+/* flex布局 */
+.flex{ display: flex; }
+.flex-row{ 
+	display: flex;
+	flex-direction: row;
+}
+.flex-column{ 
+	display: flex;
+	flex-direction: column;
+}
+
+/* 宽高 */
+.w-100{ width: 100%; }
+.w-50{ width: 50%; }
+
+/* 字体 */
+.font-20{ font-size: 20upx; }
+.font-22{ font-size: 22upx; }
+.font-24{ font-size: 24upx; }
+.font-26{ font-size: 26upx; }
+.font-28{ font-size: 28upx; }
+.font-30{ font-size: 30upx; }
+.font-32{ font-size: 32upx; }
+.font-34{ font-size: 34upx; }
+.font-36{ font-size: 36upx; }
+.font-38{ font-size: 38upx; }
+.font-40{ font-size: 40upx; }
+.font-weight-normal{ font-weight: normal!important; } /* 400 */
+.font-weight-500{ font-weight: 500!important; }
+.font-weight-600{ font-weight: 600!important; }
+.font-weight-bold{ font-weight: bold!important; } /* 700 */
+.font-weight-800{ font-weight: 800!important; }
+.font-weight-900{ font-weight: 900!important; }

@@ -1,0 +1,7 @@
+{
+  "usingComponents": {
+    "uni-combox": "/components/uni-combox/uni-combox",
+    "specification-popup": "/components/popup/specification-popup",
+    "taste-popup": "/components/popup/taste-popup"
+  }
+}

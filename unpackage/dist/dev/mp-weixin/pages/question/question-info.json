@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "反馈内容",
+  "usingComponents": {
+    "divider": "/components/common/divider"
+  }
+}

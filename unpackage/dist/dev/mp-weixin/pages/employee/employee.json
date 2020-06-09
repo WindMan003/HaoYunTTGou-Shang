@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "员工管理",
+  "usingComponents": {
+    "newadd-popup": "/components/employee/newadd-popup",
+    "change-popup": "/components/employee/change-popup"
+  }
+}

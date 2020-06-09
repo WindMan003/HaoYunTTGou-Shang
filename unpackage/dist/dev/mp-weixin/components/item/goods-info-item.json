@@ -1,0 +1,6 @@
+{
+  "component": true,
+  "usingComponents": {
+    "newadd-popup": "/components/popup/goods/newadd"
+  }
+}

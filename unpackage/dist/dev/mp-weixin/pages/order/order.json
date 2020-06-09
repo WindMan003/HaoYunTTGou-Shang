@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "用户订单",
+  "usingComponents": {
+    "time-selector": "/components/time-selector/time-selector",
+    "order-item": "/components/order/order-item"
+  }
+}

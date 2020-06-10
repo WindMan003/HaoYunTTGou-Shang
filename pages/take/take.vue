@@ -58,7 +58,8 @@
 		computed:{
 			...mapState({
 				merchantAmount:state=>state.user.merchantAmount,
-				takeAccountList:state=>state.user.takeAccountList
+				takeAccountList:state=>state.user.takeAccountList,
+				
 			})
 		},
 		methods: {

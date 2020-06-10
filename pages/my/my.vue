@@ -20,24 +20,9 @@
 		
 		<view class="position-relative pb-2" style="margin-top: -280upx; padding: 0 30upx; background: #F5F5F5;" :style="'height:'+windowH+'px;'">
 			<image class="position-absolute left-0 w-100" style="top: -34upx; height: 36upx;" src="/static/user/arc.png"></image>
-			
-			<!-- <view class="d-flex flex-row bg-white rounded-10" style="height: 120rpx;">
-				<view class="span24-8 d-flex flex-column j-center a-center" @click="gotoTake">
-					<text class="font-32">{{amount}}</text>
-					<text class="font-24 text-dark">余额</text>
-				</view>
-				<view class="span24-8 d-flex flex-column j-center a-center">
-					<text class="font-32">0</text>
-					<text class="font-24 text-dark">优惠券</text>
-				</view>
-				<view class="span24-8 d-flex flex-column j-center a-center">
-					<text class="font-32">20</text>
-					<text class="font-24 text-dark">积分</text>
-				</view>
-			</view> -->
-			
+
 			<view class="d-flex flex-column bg-white rounded-10 mt-2" style="">
-				<uni-list-item title="账户信息" :rightText="amount+' 元'" :showRightText="true"
+				<uni-list-item title="账户信息" :rightText="merchantAmount+' 元'" :showRightText="true"
 				@click="navigate('take', false)"></uni-list-item>
 				<!-- <uni-list-item title="提现账户" :rightText="getTakeAccountCount" showRightText="true" @click="takeAccount"></uni-list-item> -->
 				<!-- <uni-list-item title="店铺信息" @click="navigate('merchant', false)"></uni-list-item> -->
@@ -66,8 +51,7 @@
 		},
 		data() {
 			return {
-				windowH:0,
-				amount:0.00
+				windowH:0
 			}
 		},
 		onLoad() {
@@ -85,7 +69,8 @@
 		computed:{
 			...mapState({
 				takeAccountList:state=>state.user.takeAccountList,
-				merchantInfo:state=>state.user.merchantInfo
+				merchantInfo:state=>state.user.merchantInfo,
+				merchantAmount:state=>state.user.merchantAmount
 			}),
 			getTakeAccountCount(){
 				var temp = this.takeAccountList
@@ -108,8 +93,7 @@
 				}).then(res=>{	
 					console.log(res)
 					if(res.status == 0){
-						_self.amount = parseFloat(res.data).toFixed(2)
-						_self.initMerchantAmount(_self.amount)
+						_self.initMerchantAmount(res.data)
 						// _self.initTakeAccount()
 					}else{
 						uni.showToast({title:res.message, icon:'none', duration:1000})

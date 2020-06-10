@@ -11,7 +11,7 @@
 				</radio-group>
 			</view>
 			
-			<view class="d-flex flex-column mt-3" v-if="isShowMustPay">
+<!-- 			<view class="d-flex flex-column mt-3" v-if="isShowMustPay">
 				<view class="font-30 font-weight">
 					是否需要预先支付
 				</view>
@@ -19,7 +19,7 @@
 					<label><radio value="shi" :checked="isMustPay" style="transform:scale(0.8)"/>是</label>
 					<label class="ml-3"><radio value="fou" :checked="!isMustPay" style="transform:scale(0.8)"/>否</label>
 				</radio-group>
-			</view>
+			</view> -->
 			
 			<view class="d-flex flex-column j-center mt-3">
 				<view class="font-30 font-weight">

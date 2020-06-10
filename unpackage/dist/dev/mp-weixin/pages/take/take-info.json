@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "提现",
-  "usingComponents": {
-    "switch-account": "/components/popup/take/switch-account"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "商家登录",
-  "usingComponents": {
-    "uni-combox": "/components/uni-combox/uni-combox"
-  }
-}

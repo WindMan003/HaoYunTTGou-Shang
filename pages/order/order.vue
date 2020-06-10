@@ -29,9 +29,9 @@
 			<view class="w-100 d-flex flex-row a-center ml-2 flex-wrap" style="height: 60rpx;">
 				<block v-for="(item, index) in defaultStatus" :key="index">
 					<view class="ml-1 mt mb pl pr font-26 border rounded"
-					:style="index == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
-					@click="switchStatus(index)">
-						{{item}}
+					:style="item.Value == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
+					@click="switchStatus(item.Value)">
+						{{item.Text}}
 					</view>
 				</block>
 			</view>
@@ -65,12 +65,12 @@
 				isShowLoadMoreBoole:false,
 				totalH:0,
 				//查询值默认
-				defaultStatus:["未确认","进行中","支付中","已完成","用户取消","商户取消"],
+				defaultStatus: [],
 				beginDate:'起始时间',
 				endDate:'结束时间',
 				orderNumber:'',
 				tableNumber:'',
-				statusID:0
+				statusID: 99
 			}
 		},
 		onLoad() {
@@ -79,7 +79,7 @@
 					this.totalH = res.windowHeight
 				}
 			})
-			this.__init();
+			this.getOrderStatus()
 		},
 		computed:{
 			...mapState({
@@ -98,14 +98,31 @@
 			]),
 			...mapActions([
 			]),
+			getOrderStatus(){
+				var _self = this
+				_self.$H.post('/api/order/OrderStatus', {
+					token:true
+				}).then(res=>{
+					console.log(res)
+					if(res.status == 0){
+						let temp = res.data
+						for (let i = 0; i < temp.length; i++) {
+							let data = {}
+							data.Text = temp[i].Text
+							data.Value = temp[i].Value
+							_self.defaultStatus[i] = data
+						}
+						_self.requestData()
+					}else{
+						uni.showToast({title:res.message, icon:'none', duration:1500})
+					}
+				})
+			},
 			btnConfirmBegin(e){
 				this.beginDate = e.key
 			},
 			btnConfirmEnd(e){
 				this.endDate = e.key
-			},
-			__init(){
-				this.requestData()
 			},
 			orderNum(e){
 				this.orderNumber = e.detail.value

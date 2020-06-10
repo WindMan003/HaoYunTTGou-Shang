@@ -1,8 +1,0 @@
-{
-  "navigationBarTitleText": "修改产品",
-  "usingComponents": {
-    "uni-combox": "/components/uni-combox/uni-combox",
-    "specification-popup": "/components/popup/goods/specification",
-    "taste-popup": "/components/popup/goods/taste"
-  }
-}

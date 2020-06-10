@@ -1,6 +1,0 @@
-{
-  "navigationBarTitleText": "提现账号信息",
-  "usingComponents": {
-    "password-popup": "/components/popup/take/password"
-  }
-}

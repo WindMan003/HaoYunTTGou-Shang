@@ -1,8 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "uni-combox": "/components/uni-combox/uni-combox",
-    "uni-icons": "/components/uni-icons/uni-icons",
-    "goods-info-item": "/components/item/goods-info-item"
-  }
-}

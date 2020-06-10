@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "添加商品",
-  "usingComponents": {
-    "category-info": "/components/index/category-info",
-    "product-info": "/components/index/product-info"
-  }
-}

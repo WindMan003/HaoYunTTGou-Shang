@@ -1,6 +1,0 @@
-{
-  "component": true,
-  "usingComponents": {
-    "newadd-popup": "/components/popup/newadd-popup"
-  }
-}

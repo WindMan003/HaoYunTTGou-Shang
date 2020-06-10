@@ -1,7 +1,0 @@
-{
-  "navigationBarTitleText": "",
-  "usingComponents": {
-    "category-info": "/components/index/category-info",
-    "product-info": "/components/index/product-info"
-  }
-}

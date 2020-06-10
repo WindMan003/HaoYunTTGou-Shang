@@ -1,7 +1,0 @@
-{
-  "usingComponents": {
-    "time-selector": "/components/time-selector/time-selector",
-    "uni-combox": "/components/uni-combox/uni-combox",
-    "order-item": "/components/order/order-item"
-  }
-}

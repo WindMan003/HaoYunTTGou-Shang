@@ -24,7 +24,7 @@
 			<block v-if="loginType == 1">
 				<view class="d-flex border a-center font-30 bg-white" style="margin-left: 120rpx; width: 500rpx; height: 60rpx;">
 					<image class="ml" src="@/static/login/zhanghao.png" mode="widthFix" style="width: 35rpx;"></image>
-					<input class="ml-1" type="text" :value="account" placeholder="账号" maxlength="16" @blur="accountInput"/>
+					<input class="ml-1" type="text" :value="account" placeholder="账号/手机号" maxlength="16" @blur="accountInput"/>
 				</view>
 				<view class="d-flex border a-center mt-2 font-30 bg-white" style="margin-left: 120rpx; width: 500rpx; height: 60rpx;">
 					<image class="ml" src="@/static/login/mima.png" mode="widthFix" style="width: 35rpx;"></image>

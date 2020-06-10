@@ -18,9 +18,9 @@
         },
         /* 模块配置 */
         "modules" : {
+            "Bluetooth" : {},
             "OAuth" : {},
             "Push" : {},
-            "Bluetooth" : {},
             "Payment" : {}
         },
         /* 应用发布信息 */
@@ -53,7 +53,12 @@
                 ]
             },
             /* ios打包配置 */
-            "ios" : {},
+            "ios" : {
+                "privacyDescription" : {
+                    "NSBluetoothPeripheralUsageDescription" : "",
+                    "NSBluetoothAlwaysUsageDescription" : ""
+                }
+            },
             /* SDK配置 */
             "sdkConfigs" : {
                 "oauth" : {

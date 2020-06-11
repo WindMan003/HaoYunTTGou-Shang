@@ -6,9 +6,9 @@
 			const _self = this;  
 			const _handlePush = function(message) {  
 				// TODO
-				// uni.switchTab({
-				//     url: '/pages/index/index'
-				// })
+				uni.switchTab({
+				    url: '/pages/index/index'
+				})
 			}
 			plus.push.addEventListener('click', _handlePush);  
 			plus.push.addEventListener('receive', _handlePush);  

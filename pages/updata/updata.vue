@@ -4,7 +4,7 @@
 </template>
 
 <script>
-	import {mapState} from "vuex"
+	import {mapState,mapGetters,mapActions,mapMutations} from "vuex"
 	export default {
 		data() {
 			return {
@@ -27,23 +27,28 @@
 				}
 			});
 			
-			_self.__init()
+			_self.init()
 		},
 		computed:{
 			...mapState({
-				version:state=>state.updata.version,
 			})
 		},
 		methods: {
-			__init(){
+			...mapMutations([
+			]),
+			init(){
+				// #ifdef APP-PLUS
 				var _self = this
-				_self.$H.post('/api/appConfig/HotUpdateConfig',{}).then(res=>{
+				_self.$H.post('/api/appConfig/HotUpdateConfig', {}).then(res=>{
 					console.log(res)
 					_self.checkVersion(res.data)
 				})
+				return
+				// #endif
+				this.nextTo()
 			},
 			checkVersion(data){
-				var version = this.version
+				var version = plus.runtime.version
 				var nowversion = uni.getStorageSync('hotversion')
 				if(nowversion){
 					version = nowversion

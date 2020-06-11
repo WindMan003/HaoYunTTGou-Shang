@@ -12,7 +12,8 @@ export default {
 		takeAccountList:'',
 		merchantAmount:0.00,
 		signkey:'14daa8b8e2158349222dfe84a377733f',
-		merchantInfo: ''
+		merchantInfo: '',
+		isIOSshenhe: false
 	},
 	mutations:{
 		// 初始化数据
@@ -78,7 +79,10 @@ export default {
 		},
 		initMerchantInfo(state, merchantInfo){
 			state.merchantInfo = merchantInfo
-		}
+		},
+		initIOSshenhe(state, isIOSshenhe){
+			state.isIOSshenhe = isIOSshenhe
+		},
 	},
 	actions:{
 		initLogin({commit}, item){

@@ -7,7 +7,6 @@ import goods from "@/store/modules/goods.js"
 import order from "@/store/modules/order.js"
 import notice from "@/store/modules/notice.js"
 import employee from "@/store/modules/employee.js"
-import updata from "@/store/modules/updata.js"
 //蓝牙设置
 import bluetooth from '@/store/modules/bluetooth.js'
 
@@ -21,7 +20,6 @@ const store = new Vuex.Store({
 		order,
 		notice,
 		employee,
-		updata,
 		bluetooth
 	},
 })

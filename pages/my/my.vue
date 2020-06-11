@@ -22,14 +22,18 @@
 			<image class="position-absolute left-0 w-100" style="top: -34upx; height: 36upx;" src="/static/user/arc.png"></image>
 
 			<view class="d-flex flex-column bg-white rounded-10 mt-2" style="">
-				<uni-list-item title="账户信息" :rightText="merchantAmount+' 元'" :showRightText="true"
-				@click="navigate('take', false)"></uni-list-item>
+				<block v-if="!isIOSshenhe">
+					<uni-list-item title="账户信息" :rightText="merchantAmount+' 元'" :showRightText="true"
+					@click="navigate('take', false)"></uni-list-item>
+				</block>
 				<!-- <uni-list-item title="提现账户" :rightText="getTakeAccountCount" showRightText="true" @click="takeAccount"></uni-list-item> -->
 				<!-- <uni-list-item title="店铺信息" @click="navigate('merchant', false)"></uni-list-item> -->
 				<uni-list-item title="问题反馈" @click="navigate('question', false)"></uni-list-item>
 				<uni-list-item title="状态控制" @click="navigate('status-configuration', false)"></uni-list-item>
 				<uni-list-item title="生成桌子二维码" @click="navigate('table-qrcode', false)"></uni-list-item>
-				<uni-list-item title="下单时间控制" @click="navigate('webview', true, 'status=2')"></uni-list-item>
+				<block v-if="!isIOSshenhe">
+					<uni-list-item title="下单时间控制" @click="navigate('webview', true, 'status=2')"></uni-list-item>
+				</block>
 				<divider></divider>
 				
 				<uni-list-item showExtraIcon leftIconStyle="color:#808C98;" leftIcon="icon-icon_set_up" title="更多设置"
@@ -70,7 +74,8 @@
 			...mapState({
 				takeAccountList:state=>state.user.takeAccountList,
 				merchantInfo:state=>state.user.merchantInfo,
-				merchantAmount:state=>state.user.merchantAmount
+				merchantAmount:state=>state.user.merchantAmount,
+				isIOSshenhe:state=>state.user.isIOSshenhe
 			}),
 			getTakeAccountCount(){
 				var temp = this.takeAccountList

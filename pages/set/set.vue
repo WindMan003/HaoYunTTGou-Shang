@@ -6,7 +6,9 @@
 				<uni-list-item title="修改店铺信息" @click="changeMerchant"></uni-list-item>
 				<uni-list-item title="公告信息" @click="navigate('notice', false)"></uni-list-item>
 				<uni-list-item title="员工管理" @click="navigate('employee', false)"></uni-list-item>
-				<uni-list-item title="联系代理" @click="navigate('webview', true, 'status=1')"></uni-list-item>
+				<block v-if="!isIOSshenhe">
+					<uni-list-item title="联系代理" @click="navigate('webview', true, 'status=1')"></uni-list-item>
+				</block>
 				<!-- <uni-list-item title="设备连接" @click="navigate('bleConnect', false)"></uni-list-item> -->
 				<divider></divider>
 				<!-- <uni-list-item title="关于我们" @click="navigate('merchant', true, 'isChange=0')"></uni-list-item> -->
@@ -40,6 +42,11 @@
 					this.windowH = res.windowHeight
 				}
 			})
+		},
+		computed:{
+			...mapState({
+				isIOSshenhe:state=>state.user.isIOSshenhe
+			}),
 		},
 		methods: {
 			...mapMutations([

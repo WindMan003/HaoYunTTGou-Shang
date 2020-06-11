@@ -36,8 +36,8 @@
 		},
 		data() {
 			return {
-				swiperH:0,
-				tabIndex:0,
+				swiperH: 0,
+				tabIndex: 0,
 				categoryList: [
 					{name:'类别'},
 					{name:'产品'}
@@ -67,7 +67,8 @@
 				'updateGoodsTypeList',
 				'updateGoodsList',
 				'initMerchantConfig',
-				'initMerchantInfo'
+				'initMerchantInfo',
+				'initIOSshenhe'
 			]),
 			...mapActions([
 			]),
@@ -124,6 +125,14 @@
 					console.log(res)
 					if(res.status == 0){
 						_self.initMerchantConfig(res.data)
+						// #ifdef APP-PLUS 
+						let version = plus.runtime.version
+						if(res.data.iosShenhe == version){
+							_self.initIOSshenhe(true)
+						}else{
+							_self.initIOSshenhe(false)
+						}
+						// #endif
 					}
 				})
 			},

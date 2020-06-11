@@ -53,7 +53,7 @@
 				}
 			})
 			//加载数据
-			this.__init()
+			this.init()
 		},
 		computed:{
 			...mapState({
@@ -74,16 +74,16 @@
 			]),
 			...mapActions([
 			]),
-			__init(){
-				this.$H.post('/api/ProductType/list',{
+			init(){
+				var _self = this;
+				_self.$H.post('/api/ProductType/list',{
 				},{
 					token:true
 				}).then(res=>{
 					console.log(res)
-					if(res.status === 0){
-						this.updateGoodsTypeList(res.data)
-						this.initGoodsInfo()
-						this.getConfigData()
+					if(res.status == 0){
+						_self.updateGoodsTypeList(res.data)
+						_self.initGoodsInfo()
 					}
 				})
 			},
@@ -107,6 +107,7 @@
 					console.log(res)
 					if(res.status == 0){
 						_self.initMerchantInfo(res.data)
+						_self.getConfigData()
 					}else{
 						uni.showToast({title:res.message, icon:'none', duration:1500})
 					}
@@ -129,6 +130,7 @@
 						_self.initMerchantConfig(res.data)
 						// #ifdef APP-PLUS 
 						let version = plus.runtime.version
+						console.log(version)
 						if(res.data.iosShenhe == version && _self.osplatform == 'ios'){
 							_self.initIOSshenhe(true)
 						}else{

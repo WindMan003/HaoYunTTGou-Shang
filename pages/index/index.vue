@@ -36,6 +36,7 @@
 		},
 		data() {
 			return {
+				osplatform: '',
 				swiperH: 0,
 				tabIndex: 0,
 				categoryList: [
@@ -48,6 +49,7 @@
 			uni.getSystemInfo({
 				success: (res) => {
 					this.swiperH = res.windowHeight - uni.upx2px(82)
+					this.osplatform = res.platform
 				}
 			})
 			//加载数据
@@ -127,7 +129,7 @@
 						_self.initMerchantConfig(res.data)
 						// #ifdef APP-PLUS 
 						let version = plus.runtime.version
-						if(res.data.iosShenhe == version){
+						if(res.data.iosShenhe == version && _self.osplatform == 'ios'){
 							_self.initIOSshenhe(true)
 						}else{
 							_self.initIOSshenhe(false)

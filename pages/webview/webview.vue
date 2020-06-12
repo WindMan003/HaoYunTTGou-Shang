@@ -1,7 +1,6 @@
 <template>
 	<view>
 		<web-view :src="getLink"></web-view>
-		<!-- <view class="border d-flex a-center j-center font-30 p-2 btn-orange-white" @click="openURL">测试</view> -->
 	</view>
 </template>
 
@@ -14,11 +13,9 @@
 			}
 		},
 		onLoad:function(option) {
-			let status = option.status
-			if(status == 1){
-				this.agent = "/Agent/MyAgent"
-			}else if(status == 2){
-				this.agent = "/order/submitTimeLimit"
+			let action = option.action
+			if(action){
+				this.agent = action
 			}
 		},
 		computed:{

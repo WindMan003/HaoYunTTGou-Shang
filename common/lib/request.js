@@ -67,6 +67,7 @@ export default {
 						}
 						return rej(result.data) 
 					}
+					
 					// 成功
 					let data = result.data
 					res(data)

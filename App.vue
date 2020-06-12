@@ -6,9 +6,17 @@
 			const _self = this;  
 			const _handlePush = function(message) {  
 				// TODO
-				uni.switchTab({
-				    url: '/pages/index/index'
-				})
+				let status = this.$store.state.user.loginStatus
+				if(status){
+					uni.switchTab({
+					    url: '/pages/index/index'
+					})
+				}else{
+					uni.navigateTo({
+					    url: '/pages/login/login-choose'
+					})
+				}
+
 			}
 			plus.push.addEventListener('click', _handlePush);  
 			plus.push.addEventListener('receive', _handlePush);  
@@ -18,7 +26,6 @@
 			console.log(plus.device)
 			this.$store.commit('initClientid', clientInfo.clientid)
 			this.$store.commit('initUuid', plus.device.uuid)
-			
 			// #endif
 		},
 		onShow: function() {

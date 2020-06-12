@@ -29,10 +29,12 @@
 				<!-- <uni-list-item title="提现账户" :rightText="getTakeAccountCount" showRightText="true" @click="takeAccount"></uni-list-item> -->
 				<!-- <uni-list-item title="店铺信息" @click="navigate('merchant', false)"></uni-list-item> -->
 				<uni-list-item title="问题反馈" @click="navigate('question', false)"></uni-list-item>
-				<uni-list-item title="状态控制" @click="navigate('status-configuration', false)"></uni-list-item>
+				<block v-if="!isIOSshenhe">
+					<uni-list-item title="状态控制" @click="navigate('webview', true, 'action=/Merchant/SwitchConfig')"></uni-list-item>
+				</block>
 				<uni-list-item title="生成桌子二维码" @click="navigate('table-qrcode', false)"></uni-list-item>
 				<block v-if="!isIOSshenhe">
-					<uni-list-item title="下单时间控制" @click="navigate('webview', true, 'status=2')"></uni-list-item>
+					<uni-list-item title="下单时间控制" @click="navigate('webview', true, 'action=/order/submitTimeLimit')"></uni-list-item>
 				</block>
 				<divider></divider>
 				

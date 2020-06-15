@@ -9,7 +9,7 @@
 					</view>
 					<view class="d-flex flex-row" style="width: 60%;">
 						<view class="font-26 font-weight">状态:</view>
-						<view class="font-26 ml">{{defaultStatus[item.Status]}}</view>
+						<view class="font-26 ml">{{getStatusText(item)}}</view>
 					</view>
 				</view>
 				
@@ -49,6 +49,9 @@
 				</view>
 			</view>
 		</view>
+
+		<view class="position-absolute border pl-1 pr-1 rounded-20 font-22" v-if="item.ViewStatus == 0"
+		style="right: 30rpx; background-color: red; color: #FFFFFF;">未查看</view>
 	</view>
 </template>
 
@@ -59,13 +62,16 @@
 		},
 		data() {
 			return {
-				defaultStatus:["未确认","进行中","支付中","已完成","用户取消","商户取消"]
 			}
 		},
 		props:{
 			item:{
 				type:Object,
 				default:null
+			},
+			statusList:{
+				type: Array,
+				default: []
 			}
 		},
 		computed:{
@@ -82,6 +88,14 @@
 			...mapActions([
 				'updateGoodsListFunc'
 			]),
+			getStatusText(m_item){
+				let temp = this.statusList
+				for (let i = 0; i < temp.length; i++) {
+					if(m_item.Status == temp[i].Value){
+						return temp[i].Text
+					}
+				}
+			},
 			orderDetail(){
 				uni.navigateTo({
 					url:'../../pages/order/order-detail?ID='+this.item.ID,

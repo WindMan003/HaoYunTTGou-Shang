@@ -127,6 +127,7 @@
 			
 			if(option.ID){
 				this.getItem(option.ID)
+				this.initOrderView(option.ID)
 			}
 		},
 		computed:{
@@ -164,15 +165,30 @@
 			...mapActions([
 				
 			]),
-			getItem(id){
+			initOrderView(m_id){
 				var _self = this;
-				_self.$H.post('/api/Order/Detail',{
-					OrderID:id
+				_self.$H.post('/api/order/SetStatusViewed',{
+					OrderID: m_id
 				},{
 					token:true
 				}).then(res=>{
 					console.log(res)
-					if(res.status === 0){
+					if(res.status == 0){
+						// 设置为已读
+					}else{
+						_self.jumpShowToast(res.message)
+					}
+				})
+			},
+			getItem(m_id){
+				var _self = this;
+				_self.$H.post('/api/Order/Detail',{
+					OrderID: m_id
+				},{
+					token:true
+				}).then(res=>{
+					console.log(res)
+					if(res.status == 0){
 						_self.OrderItem = res.data.OrderItem
 						_self.tableNumberText = res.data.OrderItem.TableNumber
 						_self.tidyProductList(res.data.ProductList)

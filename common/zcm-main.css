@@ -196,6 +196,14 @@ body{
 
 .rounded{ border-radius: 5rpx; }
 .rounded-10{ border-radius: 10rpx; }
+.rounded-15{ border-radius: 15rpx; }
+.rounded-20{ border-radius: 20rpx; }
+.rounded-25{ border-radius: 25rpx; }
+.rounded-30{ border-radius: 30rpx; }
+.rounded-35{ border-radius: 35rpx; }
+.rounded-40{ border-radius: 40rpx; }
+.rounded-45{ border-radius: 45rpx; }
+.rounded-50{ border-radius: 50rpx; }
 .rounded-circle{ border-radius:100%; }
 .rounded-50p{ border-radius:50%; }
 .rounded-0{ border-radius:0; }
@@ -358,4 +366,4 @@ body{
 .btn-red-white {background-color: red; color: #FFFFFF;}
 
 /* 弧形 */
-.bg-style-bottom-arc {background: linear-gradient(left, rgba(0,0,0,.7), rgba(0,0,0,.8));}
+/* .bg-style-bottom-arc {background: linear-gradient(left, rgba(0,0,0,.7), rgba(0,0,0,.8));} */

@@ -29,10 +29,12 @@
 				
 				<view class="w-100 d-flex flex-row a-center ml-2 flex-wrap" style="height: 60rpx;">
 					<block v-for="(item, index) in defaultStatus" :key="index">
-						<view class="ml-1 mt mb pl pr font-26 border rounded"
+						<view class="ml-1 mt mb pl pr font-26 border rounded position-relative"
 						:style="item.Value == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
 						@click="switchStatus(item.Value)">
 							{{item.Text}}
+							<view class="position-absolute rounded-circle" v-if="item.ViewStatus == 1"
+							style="width: 15rpx; height: 15rpx; background-color: red; right: 2rpx; top: 2rpx;"></view>
 						</view>
 					</block>
 				</view>
@@ -40,7 +42,7 @@
 			
 			<scroll-view scroll-y :croll-with-animation="true" :style="'height:'+(totalH - 100)+'px;'" v-if="orderList.length > 0" @scrolltolower="loadMore">
 				<view class="" v-for="(item,index) in orderList" :key="index">
-					<order-item :item="item"></order-item>
+					<order-item :item="item" :statusList="defaultStatus"></order-item>
 				</view>
 				<view class="d-flex a-center j-center text-light-muted font-md py-3">{{ loadText }}</view>
 			</scroll-view>
@@ -56,7 +58,6 @@
 	import orderItem from "@/components/order/order-item.vue"
 	import timeSelector from "@/components/time-selector/time-selector.vue"
 	import refresh from '@/components/common/refresh.vue'
-	
 	
 	import {mapState, mapGetters, mapActions, mapMutations} from "vuex"
 	export default {
@@ -87,8 +88,9 @@
 					this.totalH = res.windowHeight
 				}
 			})
+		},
+		onShow() {
 			this.getOrderStatus()
-		
 		},
 		computed:{
 			...mapState({
@@ -119,8 +121,10 @@
 							let data = {}
 							data.Text = temp[i].Text
 							data.Value = temp[i].Value
+							data.ViewStatus = 0
 							_self.defaultStatus[i] = data
 						}
+						_self.defaultPageIndex = 1
 						_self.requestData()
 					}else{
 						uni.showToast({title:res.message, icon:'none', duration:1500})
@@ -180,7 +184,7 @@
 		
 			requestData(className){
 				var _self = this;
-				var uploadList = {PageIndex:_self.defaultPageIndex};
+				var uploadList = {PageIndex: _self.defaultPageIndex};
 				if(this.orderNumber != ''){
 					uploadList.OrderID = this.orderNumber
 				}
@@ -196,13 +200,11 @@
 				if(this.statusID != 99){
 					uploadList.Status = this.statusID
 				}
-				
-				_self.$H.post('/api/Order/List',uploadList,{
+				_self.$H.post('/api/Order/List', uploadList, {
 					token:true
 				}).then(res=>{
 					console.log(res)
 					if(res.status == 0){
-						_self.isHaveMore()
 						if(className == 'refresh'){
 							uni.showToast({title:'刷新成功', icon:'none', duration:1500})
 						}
@@ -214,6 +216,8 @@
 						}else{
 							_self.updateOrderList(res.data)
 						}
+						_self.isHaveMore()
+						_self.getStatusList()
 					}else{	
 						uni.showToast({title:res.message, icon:'none', duration:1500})
 					}
@@ -230,6 +234,20 @@
 			refreshList() {
 				this.refresh()
 				this.$refs.refresh.endAfter()	
+			},
+			// 获取是否有订单未查看
+			getStatusList(){
+				let temp = this.orderList
+				for (let i = 0; i < temp.length; i++) {
+					if(temp[i].ViewStatus == 0){
+						for (let j = 0; j < this.defaultStatus.length; j++) {
+							if(this.defaultStatus[j].Value == temp[i].Status){
+								this.defaultStatus[j].ViewStatus = 1
+								break
+							}
+						}
+					}
+				}
 			}
 		}
 	}

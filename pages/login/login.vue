@@ -92,8 +92,10 @@
 	export default {
 		data() {
 			return {
-				account:'qazwsxedc',
-				password:'123123',
+				account:'',
+				password:'',
+				// account:'qazwsxedc',
+				// password:'123123',
 				phone:'',
 				phoneCode:'',
 				loginType:1,

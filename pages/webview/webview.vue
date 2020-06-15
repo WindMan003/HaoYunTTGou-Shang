@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<web-view :src="getLink"></web-view>
+		<web-view :webview-styles="webviewStyles" :src="getLink" @message="handleMessage"></web-view>
 	</view>
 </template>
 
@@ -9,7 +9,12 @@
 	export default {
 		data() {
 			return {
-				agent: ''
+				agent: '',
+				webviewStyles: {
+					progress: {
+						color: '#FF3333'
+					}
+				}
 			}
 		},
 		onLoad:function(option) {
@@ -25,13 +30,16 @@
 			}),
 			getLink(){
 				var link = this.merchantSite + this.agent + '?token=' + encodeURIComponent(this.token)
+				// var link = 'https://mer.tuanmi028.com/download/test/test1.html'
 				console.log(link)
 			
 				return link
 			}
 		},
 		methods: {
-			
+			handleMessage(evt) {  
+				console.log('接收到的消息：' + JSON.stringify(evt.detail)); 
+			},
 		}
 	}
 </script>

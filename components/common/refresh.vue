@@ -4,7 +4,7 @@
 			<view class="refresh" :style="isZoom" :class="isEnd == 2 ? 'animationSmall' : ''">
 				<view class="refreshWord" v-if="isEnd == 0">{{ showText }}</view>
 				<view class="refreshCirle animation" v-if="isEnd == 1"></view>
-				<image class="iconYes" src="/static/icon-yes.png" v-if="isEnd == 2"></image>
+				<image class="iconYes" src="/static/common/icon-yes.png" v-if="isEnd == 2"></image>
 			</view>
 		</view>
 		<view><slot></slot></view>
@@ -136,7 +136,8 @@ export default {
 	align-items: center;
 	justify-content: center;
 	height: 50rpx;
-	background: #ffffff;
+	background: #666666;
+	color: #FFFFFF;
 	box-shadow: 0 0 16rpx 0 rgba(0, 0, 0, 0.1);
 	border-radius: 50rpx;
 }

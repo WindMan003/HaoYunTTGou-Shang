@@ -169,7 +169,7 @@
 					success(res) {
 						// console.log(res)
 						//蓝牙设备监听 uni.onBluetoothDeviceFound
-						plus.bluetooth.onBluetoothDeviceFound((result) => {
+						uni.onBluetoothDeviceFound((result) => {
 							console.log('onBluetoothDeviceFound:', result)
 							let arr = that.list;
 							let devices = [];
@@ -190,7 +190,7 @@
 						});
 						that.time = setTimeout(() => {
 							// uni.getBluetoothDevices
-							plus.bluetooth.getBluetoothDevices({
+							uni.getBluetoothDevices({
 								success(res2) {
 									let devices = [];
 									let list = res2.devices;
@@ -228,7 +228,7 @@
 				})
 				console.log('deviceId:', title)
 				// uni.createBLEConnection
-				plus.bluetooth.createBLEConnection({
+				uni.createBLEConnection({
 					deviceId: title,
 					success(res) {
 						console.log('createBLEConnection success:', res)
@@ -250,7 +250,7 @@
 				// uni.getBLEDeviceServices
 				setTimeout(()=>{
 					uni.hideLoading()
-					plus.bluetooth.getBLEDeviceServices({
+					uni.getBLEDeviceServices({
 						deviceId: that.BLEInformation.deviceId,
 						success(res) {
 							console.log('getBLEDeviceServices success:',res)
@@ -275,7 +275,7 @@
 					notifyCharacter: notify
 				} = that;
 				// uni.getBLEDeviceCharacteristics
-				plus.bluetooth.getBLEDeviceCharacteristics({
+				uni.getBLEDeviceCharacteristics({
 					deviceId: that.BLEInformation.deviceId,
 					serviceId: list[num].uuid,
 					success(res) {

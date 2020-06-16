@@ -1,5 +1,10 @@
 <template>
 	<view class="main">
+<!-- 		<view class="mt-1 position-relative" style="height:80rpx;">
+			<view class="font-26 border rounded-10 pl-1 pr-1 position-absolute btn-orange-white text-center" 
+			style="right: 15rpx;" @click="employeeLoginOut">退出登录</view>
+		</view> -->
+		
 		<refresh ref="refresh" @isRefresh="refreshList">
 			<view class="border-bottom w-100 d-flex flex-column a-center"  style="height:200rpx;">
 				<view class="w-100 d-flex flex-row a-center ml-2" style="height: 80rpx;">
@@ -25,6 +30,8 @@
 					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空条件</view>
 					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询订单</view>
 					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refresh">刷新列表</view>
+					<!-- <view class="font-26 border rounded-10 pl-1 pr-1 position-absolute btn-orange-white text-center"
+					style="right: 15rpx;" @click="employeeLoginOut">退出登录</view> -->
 				</view>
 				
 				<view class="w-100 d-flex flex-row a-center ml-2 flex-wrap" style="height: 60rpx;">
@@ -105,7 +112,8 @@
 		methods: {
 			...mapMutations([
 				'updateOrderList',
-				'pushUpdateOrderList'
+				'pushUpdateOrderList',
+				'logout'
 			]),
 			...mapActions([
 			]),
@@ -248,6 +256,13 @@
 						}
 					}
 				}
+			},
+			employeeLoginOut(){
+				uni.setStorageSync('em_token', '')
+				this.logout()
+				uni.reLaunch({
+					url:'../login/login-employee'
+				})
 			}
 		}
 	}

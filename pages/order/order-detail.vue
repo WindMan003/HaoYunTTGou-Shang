@@ -32,10 +32,15 @@
 				<view class="w-100 d-flex flex-column ml-1 mt-1">
 					<checkbox-group @change="checkboxChange">
 						<block v-for="(item1, index1) in ProductList" :key="index1">
-							<view class="font-26 font-weight border-bottom pt-2"
-							v-if="item1.addRound != 0">第{{item1.addRound}}轮新加</view>
-							<view class="font-26 font-weight border-bottom pt-2"
-							v-if="item1.addRound == 0">首轮点购</view>
+							<view class="d-flex flex-row a-center border-bottom" v-if="item1.addRound != 0">
+								<view class="font-26 font-weight pt-2">第{{item1.addRound}}轮新加</view>
+								<view class="pt-2 ml-4 font-26 font-weight" style="color: #007BFF;" 
+								v-if="!getConfirmShow" @click="printOrder(item1.addRound)">打印新加订单</view>
+							</view>
+							<view class="font-26 font-weight border-bottom pt-2" v-if="item1.addRound == 0">
+								首轮点购
+							</view>
+
 							<label class="d-flex flex-column border-bottom" v-for="(item2, index2) in item1.list" :key="index2">
 								<view class="d-flex flex-row">
 									<view class="font-26 ml-1 pt-2 d-flex flex-row" style="width: 40%;">
@@ -74,7 +79,10 @@
 				<view class="w-100 d-flex flex-row ml-1 mt-3">
 					<view class="d-flex flex-row" style="width: 55%;">
 						<block v-if="getShowPrint">
-							<view class="font-26 border pl-1 pr-1 ml-1 btn-orange-white" @click="printOrder">打印订单</view>
+							<view class="d-flex a-center flex-row font-26">
+								<view class="border pl-1 pr-1 ml-1 btn-orange-white" @click="printOrder">打印订单</view>
+								<view class="ml-3">已打印{{printCount}}次</view>
+							</view>
 						</block>
 					</view>
 					<view class="d-flex flex-row" style="width: 45%;">
@@ -89,8 +97,7 @@
 					</view>
 				</view>
 			
-				<view class="w-100 d-flex flex-row ml-1 mt-3" style="height: 60rpx;">
-				</view>
+				<view class="w-100 d-flex flex-row ml-1 mt-3" style="height: 60rpx;"></view>
 			</view>
 		</scroll-view>
 		
@@ -115,7 +122,9 @@
 				ProductList:[],
 				tableNumberText:'',
 				statusList:[],
-				select:false
+				select:false,
+				Status: -99,
+				printCount: 0
 			}
 		},
 		onLoad: function (option) {
@@ -127,7 +136,6 @@
 			
 			if(option.ID){
 				this.getItem(option.ID)
-				this.initOrderView(option.ID)
 			}
 		},
 		computed:{
@@ -145,7 +153,7 @@
 				}
 			},
 			getConfirmShow(){
-				if(this.OrderItem.Status == 0){
+				if(this.OrderItem.AddStatus == 1 || this.OrderItem.Status == 0){
 					return true
 				}else{
 					return false
@@ -175,8 +183,23 @@
 					console.log(res)
 					if(res.status == 0){
 						// 设置为已读
+						_self.initPrintCount()
 					}else{
-						_self.jumpShowToast(res.message)
+						_self.$Common.showToast(res)
+					}
+				})
+			},
+			initPrintCount(){
+				var _self = this
+				let postData = { OrderID:_self.OrderItem.ID }
+				_self.$H.post('/api/order/PrintCount', postData, {
+					token:true
+				}).then(res=>{
+					console.log(res)
+					if(res.status == 0){
+						_self.printCount = res.data
+					}else{
+						_self.$Common.showToast(res)
 					}
 				})
 			},
@@ -189,9 +212,11 @@
 				}).then(res=>{
 					console.log(res)
 					if(res.status == 0){
+						_self.Status = res.data.Status
 						_self.OrderItem = res.data.OrderItem
 						_self.tableNumberText = res.data.OrderItem.TableNumber
 						_self.tidyProductList(res.data.ProductList)
+						_self.initOrderView(m_id)
 					}else{
 						_self.jumpShowToast(res.message)
 					}
@@ -199,6 +224,7 @@
 			},
 			tidyProductList(list){
 				var temp = this.OrderItem
+				this.ProductList = []
 				for (var i = temp.AddRound; i >= 0; i--) {
 					let newItem = {addRound: i, list: []}
 					for (var j = 0; j < list.length; j++) {
@@ -209,6 +235,7 @@
 					this.ProductList.push(newItem)
 				}
 				this.ProductList.reverse()
+				console.log(this.ProductList)
 			},
 			getStatusText(index){
 				this.statusText = this.defaultStatus[index]
@@ -334,27 +361,31 @@
 			},
 			confirmOrder(){
 				var _self = this;
+				var m_url = '/api/Order/ConfirmOrder'
+				if(_self.OrderItem.AddStatus == 1){
+					m_url = '/api/Order/ConfirmAddStatus'
+				}
 				uni.showModal({
 				    title: '提示',
 				    content: '确认订单',
 				    success: function (res) {
 				        if (res.confirm) {
-				            _self.$H.post('/api/Order/ConfirmOrder',{
-				            	OrderID:_self.OrderItem.ID
-				            },{
+				            _self.$H.post(m_url, { OrderID:_self.OrderItem.ID }, {
 				            	token:true
 				            }).then(res=>{
 				            	console.log(res)
-								_self.jumpShowToast(res.message)
 				            	if(res.status == 0){
-				            		_self.OrderItem.Status = 1
-									var temp = _self.orderList
-									for (var i = 0; i < temp.length; i++) {
-										if(temp[i].ID == _self.OrderItem.ID){
-											temp[i].Status = 1
-										}
-									}
-				            	}
+				     //        		_self.OrderItem.Status = 1
+									// var temp = _self.orderList
+									// for (var i = 0; i < temp.length; i++) {
+									// 	if(temp[i].ID == _self.OrderItem.ID){
+									// 		temp[i].Status = 1
+									// 	}
+									// }
+									_self.getItem(_self.OrderItem.ID)
+				            	}else{
+									_self.$Common.showToast(res)
+								}
 				            })
 				        } else if (res.cancel) {
 				            console.log('用户点击取消');
@@ -392,7 +423,7 @@
 				    }
 				});
 			},
-			printOrder(){
+			printOrder(m_around){
 				var _self = this
 				if(_self.BLEInformation.writeServiceId == ''){
 					uni.showModal({
@@ -407,34 +438,38 @@
 					    }
 					});
 				}else{
-					_self.gotoPrintOrder()
+					_self.gotoPrintOrder(m_around)
 				}
 			},
-			gotoPrintOrder(){
+			gotoPrintOrder(m_around){
 				var _self = this
-				let postData = { OrderID:_self.OrderItem.ID }
-				_self.$H.post('/api/order/PrintCount', postData, {
-					token:true
-				}).then(res=>{
-					console.log(res)
-					if(res.status == 0){
-						if(res.data > 0){
-							uni.showModal({
-							    title: '提示',
-							    content: '订单已打印'+res.data+'次,继续打印?',
-							    success: function (res) {
-							        if (res.confirm) {
-										_self.$refs.sendCommand.receiptOrder(_self.OrderItem, _self.ProductList, _self.statusText)
-							        } else if (res.cancel) {
-							            console.log('用户点击取消');
-							        }
-							    }
-							});
-						}else{
-							_self.$refs.sendCommand.receiptOrder(_self.OrderItem, _self.ProductList, _self.statusText)
-						}
+				var printOrderLit = _self.ProductList
+				for (let i = 0; i < _self.ProductList.length; i++) {
+					if(_self.ProductList[i].addRound == m_around){
+						printOrderLit = _self.ProductList[i]
+						break
 					}
-				})
+				}
+				if(m_around){
+					_self.$refs.sendCommand.receiptAddOrder(_self.OrderItem, printOrderLit, _self.statusText)
+					return
+				}
+
+				if(_self.printCount > 0){
+					uni.showModal({
+						title: '提示',
+						content: '订单已打印'+_self.printCount+'次,继续打印?',
+						success: function (res) {
+							if (res.confirm) {
+								_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+							} else if (res.cancel) {
+								console.log('用户点击取消');
+							}
+						}
+					});
+				}else{
+					_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+				}
 			},
 			printComplete(){
 				console.log('打印完成，回调结束')

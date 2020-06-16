@@ -159,7 +159,7 @@
 			},
 
 			//票据打印
-			receiptOrder(m_item, m_list, m_status){
+			receiptOrder(m_item, m_list, m_statusText){
 				console.log(m_item)
 				console.log(m_list)
 				var that = this;
@@ -180,9 +180,13 @@
 				command.setFontSize(16);//字体大小
 				command.setSelectJustification(1)//居中
 				command.rowSpace(100);
-				command.setText('<- '+m_status+' ->');
+				command.setText('<- '+m_statusText+' ->');
 				command.setPrint();
 				command.rowSpace(60);
+				// 桌子号
+				command.setSelectJustification(1);//居中
+				command.setText('桌子号：'+m_item.TableNumber);
+				command.setPrint();
 				
 				command.bold(0);//取消加粗
 				command.setFontSize(0);//正常字体
@@ -222,7 +226,7 @@
 						if(m_list[i].addRound == 0){
 							command.setText('首轮点购');
 						}else{
-							command.setText('第'+(m_list[i].addRound+1)+'轮加菜');
+							command.setText('第'+(m_list[i].addRound)+'轮加菜');
 						}
 						command.setPrint();
 					}
@@ -278,6 +282,89 @@
 				command.setText('--------------------------------')
 				command.setPrint();
 				
+				command.setPrintAndFeedRow(3);
+				
+				that.isReceiptSend = true;
+				that.prepareSend(command.getData());
+			},
+			
+			//加菜票据打印
+			receiptAddOrder(m_item, m_list, m_statusText){
+				console.log(m_item)
+				console.log(m_list)
+				var that = this;
+				var canvasWidth = that.canvasWidth
+				var canvasHeight = that.canvasHeight
+				var command = esc.jpPrinter.createNew()
+				command.init()
+				// 标题
+				command.bold(1);//加粗
+				command.setFontSize(16);//字体大小
+				command.setSelectJustification(1)//居中
+				command.rowSpace(100);
+				command.setText(that.merchantInfo.Name);
+				command.setPrint();
+				command.rowSpace(60);
+				
+				command.bold(1);//加粗
+				command.setFontSize(16);//字体大小
+				command.setSelectJustification(1)//居中
+				command.rowSpace(100);
+				command.setText('<- '+m_statusText+' ->');
+				command.setPrint();
+				command.rowSpace(60);
+				// 桌子号
+				command.setSelectJustification(1);//居中
+				command.setText('桌子号：'+m_item.TableNumber);
+				command.setPrint();
+				
+				command.bold(0);//取消加粗
+				command.setFontSize(0);//正常字体
+				//时间
+				command.setSelectJustification(0);//居左
+				command.setText(m_item.CreateTime);
+				command.setPrint();
+				//编号
+				command.setSelectJustification(0);//居左
+				command.setText('订单号：'+m_item.ID);
+				// command.setPrintAndFeed(80);//打印并走纸feed个单位
+				command.setPrint();
+				
+				command.setSelectJustification(1);//居中
+				command.setText('--------------------------------')
+				command.setPrint();
+				
+				//列表
+				command.setSelectJustification(0);
+				command.rowSpace(80);//间距
+				command.bold(5);//加粗
+				command.setText("名称");
+				command.setAbsolutePrintPosition(140);
+				command.setText("单价");
+				command.setAbsolutePrintPosition(220);
+				command.setText("数量");
+				command.setAbsolutePrintPosition(300);
+				command.setText("价格");
+				command.setPrint()
+				
+				command.bold(0);
+				command.rowSpace(80);//间距
+				command.setSelectJustification(1);//居中
+				command.setText('第'+(m_list.addRound)+'轮加菜')
+				command.setPrint();
+					
+				command.setSelectJustification(0);//居中
+				for (var j = 0; j < m_list.list.length; j++) {
+					let temp = m_list.list[j]
+					command.setText(temp.ProductName);
+					command.setAbsolutePrintPosition(140);
+					command.setText(temp.Price);
+					command.setAbsolutePrintPosition(220);
+					command.setText(temp.Count);
+					command.setAbsolutePrintPosition(300);
+					command.setText('￥'+temp.TotalAmount);
+					command.setPrint()
+				}
 				command.setPrintAndFeedRow(3);
 				
 				that.isReceiptSend = true;

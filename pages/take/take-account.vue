@@ -12,6 +12,7 @@
 					</view>
 					<view class="font-32 d-flex flex-row a-center pt-2 pb-2">
 						<text class="ml-2">{{item.Account}}</text>
+						<view class="position-absolute" style="right: 20rpx;" v-if="item.Status > 0">{{item.StatusText}}</view>
 					</view>
 				</view>
 			</block>
@@ -34,13 +35,13 @@
 			}
 		},
 		onShow() {
-			this.__init()
+			this.init()
 		},
 		methods: {
 			...mapMutations([
 				'initTakeAccountList'
 			]),
-			__init(){
+			init(){
 				var _self = this
 				uni.showLoading({title:'', mask:true})
 				_self.$H.post('/api/TakeAccount/List',{},{

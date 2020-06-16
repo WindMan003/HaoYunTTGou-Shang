@@ -1,24 +1,24 @@
 <template>
 	<view class="main">
 		<view class="w-100 border-top"></view>
-		<view class="d-flex flex-row a-center j-sa border-bottom" style="height: 60rpx;">
-			<block v-for="(item, index) in typeList.Status" :key="index">
+<!-- 		<view class="d-flex flex-row a-center j-sa border-bottom" style="height: 60rpx;">
+			<block v-for="(item, index) in typeList" :key="index">
 				<view class="font-26" @click="changeType(index, item)"
 				:class="typeIndex == index ? 'font-weight border-bottom-6 border-bottom-orange':''">{{item.Text}}</view>
 			</block>
 		</view>
-		<divider></divider>
+		<divider></divider> -->
 		
-		<block v-for="(item, index) in takeList" :key="index">
-			<view class="border-bottom ml-3 pb-2 pt-2" @click="itemInfo(item)">
+		<block v-for="(item, index) in billList" :key="index">
+			<view class="border-bottom ml-3 pb-2 pt-2">
 				<view class="d-flex flex-row a-center font-28 position-relative">
-					<view class="">提现</view>
-					<view class="ml-3">({{getTakeType(item.TakeType)}})</view>
-					<view class="font-weight position-absolute" style="right: 30rpx;">-{{item.Amount}}</view>
+					<view class="">{{item.TradeTypeName}}</view>
+					<view class="font-weight position-absolute" style="right: 30rpx;"
+					:style="item.Amount > 0 ? 'color: #FF582B':''">{{item.Amount}}</view>
 				</view>
 				<view class="d-flex flex-row a-center mt-1 position-relative">
 					<view class="font-24 text-muted">{{item.CreateTime}}</view>
-					<view class="font-24 text-muted position-absolute" style="right: 30rpx;">{{getTakeStatus(item)}}</view>
+					<view class="font-24 text-muted position-absolute" style="right: 30rpx;">余额：{{item.CurrentAmount}}</view>
 				</view>
 			</view>
 		</block>
@@ -26,7 +26,6 @@
 		<view class="loading">{{loadingTxt}}</view>
 		<view class="" style="height: 30rpx;"></view>
 	</view>
-	
 </template>
 
 <script>
@@ -38,10 +37,9 @@
 			return {
 				typeIndex: 0,
 				typeList: [],
-				takeList: [],
-				pageSize: 15,
+				billList: [],
 				pageIndex: 1,
-				status: -1,
+				pageSize: 15,
 				loadingTxt: '上拉加载更多'
 			}
 		},
@@ -63,65 +61,34 @@
 		},
 		computed:{
 			...mapState({
-				merchantAmount:state=>state.user.merchantAmount,
-				takeAccountList:state=>state.user.takeAccountList
+
 			})
 		},
 		methods: {
 			...mapMutations([
-				'initTakeAccountList'
+				
 			]),
 			init(){
 				var _self = this
-				_self.$H.post('/api/Finance/TakeTypeAndStatusSelect',{},{
+				_self.$H.post('/API/Finance/TradeTypes', {}, {
 					token:true
 				}).then(res=>{	
 					console.log(res)
 					if(res.status == 0){
 						_self.typeList = res.data
-						_self.initTakeList()
+						_self.initBillList()
 					}else{
-						uni.showToast({title:res.message, icon:'none', duration:1000})
+						_self.$Common.showToast(res)
 					}
 				})
 			},
-			getTakeType(typeID){
-				if(typeID == 2){
-					return '支付宝'
-				}
-			},
-			getTakeStatus(m_item){
-				if(m_item.FailReturnMoneyStatus == 0){
-					var temp = this.typeList.Status
-					for (var i = 0; i < temp.length; i++) {
-						if(m_item.Status == temp[i].Value){
-							return temp[i].Text
-						}
-					}
-				}else{
-					return m_item.FailReturnMoneyStatusText
-				}
-
-			},
-			itemInfo(item){
-				var statusText = this.getTakeStatus(item)
-				console.log(statusText)
-				uni.navigateTo({
-					url:'take-list-info?status='+statusText+'&item='+ encodeURIComponent(JSON.stringify(item))
-				})
-			},
-			changeType(index, item){
-				this.typeIndex = index
-				this.status = item.Value
-				this.pageIndex = 1
-				this.initTakeList()
-			},
-			initTakeList(m_text){
+			initBillList(m_text){
 				var _self = this
-				_self.$H.post('/api/Finance/TakeRecord',{
+				let postData = {
 					PageIndex: _self.pageIndex,
-					Status: _self.status
-				},{
+					PageSize: _self.pageSize
+				}
+				_self.$H.post('/API/Finance/AmountRecord', postData, {
 					token:true
 				}).then(res=>{	
 					console.log(res)
@@ -138,9 +105,9 @@
 						}
 						
 						if(m_text == 'loadmore' && res.data.length > 0){
-							_self.takeList.push(res.data)
+							_self.billList.push(res.data)
 						}else{
-							_self.takeList = res.data
+							_self.billList = res.data
 						}
 					}else{
 						_self.$Common.showToast(res)
@@ -149,13 +116,13 @@
 			},
 			onPullDownRefresh(){
 				this.pageIndex = 1
-				this.initTakeList('refresh')
+				this.initBillList('refresh')
 			},
 			getMore(){
 				this.loadingTxt = '加载中'
 				this.pageIndex = this.pageIndex + 1
 				uni.showNavigationBarLoading()
-				this.initTakeList('loadmore')
+				this.initBillList('loadmore')
 			}
 		}
 	}

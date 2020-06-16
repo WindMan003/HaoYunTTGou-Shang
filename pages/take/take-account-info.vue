@@ -4,17 +4,22 @@
 		
 		<view class="d-flex flex-column a-center j-center mt-3">
 			<view class="d-flex flex-row a-center j-center font-32 ml-4 font-weight">
-				<text>{{item.TypeName}}</text>
+				<view>{{item.TypeName}}</view>
 			</view>
-			<view class="w-100 d-flex flex-row font-32 mt-3">
+			<view class="w-100 d-flex flex-row font-32 mt-3 a-center">
 				<view class="" style="width: 20%;"></view>
-				<text class="ml-3">账号</text>
+				<view class="ml-3">账号</view>
 				<view class="ml-4">{{item.Account}}</view>
 			</view>
-			<view class="w-100 d-flex flex-row font-32 mt-3">
+			<view class="w-100 d-flex flex-row font-32 mt-3 a-center">
 				<view class="" style="width: 20%;"></view>
-				<text class="ml-3">姓名</text>
+				<view class="ml-3">姓名</view>
 				<view class="ml-4">{{item.Name}}</view>
+			</view>
+			<view class="w-100 d-flex flex-row font-32 mt-3 a-center" v-if="item.Error">
+				<view class="" style="width: 20%;"></view>
+				<view class="ml-3">异常原因</view>
+				<view class="ml-4">{{item.Error}}</view>
 			</view>
 		</view>
 		

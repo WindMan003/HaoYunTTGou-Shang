@@ -50,7 +50,7 @@
 			</view>
 		</view>
 
-		<view class="position-absolute border pl-1 pr-1 rounded-20 font-22" v-if="item.ViewStatus == 0"
+		<view class="position-absolute border text-center pl-1 pr-1 rounded-20 font-22" v-if="item.ViewStatus == 0"
 		style="right: 30rpx; background-color: red; color: #FFFFFF;">未查看</view>
 	</view>
 </template>

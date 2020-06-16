@@ -150,7 +150,8 @@
         },{
 		    "path" : "pages/take/take-list",
 		    "style" : {
-		    	"navigationBarTitleText": "提现列表"
+		    	"navigationBarTitleText": "提现列表",
+				"enablePullDownRefresh": true
 		    }
 		},{
 		    "path" : "pages/take/take-list-info",
@@ -213,6 +214,16 @@
             "style" : {
 				"navigationBarTitleText": "蓝牙设备连接"
 			}
+        },{
+            "path" : "pages/bill/bill",
+            "style" : {
+				"navigationBarTitleText": "账单明细",
+				"enablePullDownRefresh": true
+			}
+        }
+        ,{
+            "path" : "pages/bill/bill-info",
+            "style" : {}
         }
     ],
 	"globalStyle": {

@@ -70,11 +70,7 @@ export default {
 		},
 		initMerchantAmount(state, amount){
 			if(amount){
-				let numStr = amount.toString()
-				let index = numStr.indexOf('.')
-				let result = Number(numStr.slice(0, index + 3))
-				
-				state.merchantAmount = result
+				state.merchantAmount = amount
 			}
 		},
 		initMerchantInfo(state, merchantInfo){

@@ -26,14 +26,19 @@
 			</view>
 		</block>
 		<view class="" style="height: 200rpx;"></view>
-		<view class="d-flex flex-row a-center" style="color: #007AFF;">
-			<view class="position-relative" style="width: 50%;">
+		<view class="d-flex flex-row a-center j-center" style="color: #007AFF;">
+			<view class="" @click="billList">账单</view>
+			<view class="ml-1 mr-1 text-muted">|</view>
+			<view class="" @click="takeList">提现明细</view>
+			<view class="ml-1 mr-1 text-muted">|</view>
+			<view class="" @click="modifyTakePassword">修改提现密码</view>
+			<!-- <view class="position-relative" style="width: 50%;">
 				<text class="position-absolute font-24" style="right: 20rpx;" @click="takeList">提现明细</text>
 				<view class="text-muted position-absolute font-24" style="right: 0;">|</view>
 			</view>
 			<view class="position-relative" style="width: 50%;">
 				<text class="position-absolute font-24" style="left: 20rpx;" @click="modifyTakePassword">修改提现密码</text>
-			</view>
+			</view> -->
 		</view>
 	</view>
 </template>
@@ -160,6 +165,11 @@
 			modifyTakePassword(){
 				uni.navigateTo({
 					url:'../take/take-modifyPassword'
+				})
+			},
+			billList(){
+				uni.navigateTo({
+					url:'../bill/bill'
 				})
 			},
 			takeList(){

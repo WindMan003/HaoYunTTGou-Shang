@@ -80,7 +80,7 @@
 					<view class="d-flex flex-row" style="width: 55%;">
 						<block v-if="getShowPrint">
 							<view class="d-flex a-center flex-row font-26">
-								<view class="border pl-1 pr-1 ml-1 btn-orange-white" @click="printOrder">打印订单</view>
+								<view class="border pl-1 pr-1 ml-1 btn-orange-white" @click="printOrder(-1)">打印订单</view>
 								<view class="ml-3">已打印{{printCount}}次</view>
 							</view>
 						</block>
@@ -444,13 +444,16 @@
 			gotoPrintOrder(m_around){
 				var _self = this
 				var printOrderLit = _self.ProductList
-				for (let i = 0; i < _self.ProductList.length; i++) {
-					if(_self.ProductList[i].addRound == m_around){
-						printOrderLit = _self.ProductList[i]
-						break
+				console.log('aaaaaaaaaa')
+				console.log(m_around)
+				if(m_around > 0){
+					console.log('sssssssssssssssssssssss')
+					for (let i = 0; i < _self.ProductList.length; i++) {
+						if(_self.ProductList[i].addRound == m_around){
+							printOrderLit = _self.ProductList[i]
+							break
+						}
 					}
-				}
-				if(m_around){
 					_self.$refs.sendCommand.receiptAddOrder(_self.OrderItem, printOrderLit, _self.statusText)
 					return
 				}

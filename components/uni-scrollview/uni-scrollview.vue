@@ -55,18 +55,18 @@ export default {
 		this.isRefreshing = true
 		this.triggered = true;
 		this.isInfiniting = false; // 若下拉刷新和上拉加载同时存在，则每次刷新需要重置上拉加载状态
-		this.$emit('onRefresh', { complete: this.refresherComplete});
+		this.$emit('onrefresh', { complete: this.refresherComplete});
     },
     refresherComplete() {
 		this.triggered = false;
 		this.isRefreshing = false;
-		this.isInfiniting = false;
+		this.isInfiniting = true;
 		this.infiniteDisabled = false;
     },
     infinite() {
 		if(this.isInfiniting) {
 			this.loadMoreStatus = this.infiniteDisabled  ? 'noMore' : 'loading';
-			this.$emit('onInfinite', { setStatus: function(status, disabled) {
+			this.$emit('oninfinite', { setStatus: function(status, disabled) {
 				this.loadMoreStatus = status;
 				this.infiniteDisabled = disabled;
 			}.bind(this)});

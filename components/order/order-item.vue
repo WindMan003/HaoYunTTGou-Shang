@@ -236,14 +236,14 @@
 						content: '订单已打印'+_self.printCount+'次,继续打印?',
 						success: function (res) {
 							if (res.confirm) {
-								_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+								_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
 							} else if (res.cancel) {
 								console.log('用户点击取消');
 							}
 						}
 					});
 				}else{
-					_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+					_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
 				}
 			},
 			printComplete(){

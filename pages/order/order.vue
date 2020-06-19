@@ -5,75 +5,69 @@
 			style="right: 15rpx;" @click="employeeLoginOut">退出登录</view>
 		</view> -->
 		
-		<refresh ref="refresh" @isRefresh="refreshList">
-			<view class="border-bottom w-100 d-flex flex-column a-center"  style="height:240rpx;">
-				<view class="w-100 d-flex flex-row a-center ml-2" style="height: 80rpx;">
-					<view class="border font-30"  style="width: 200rpx; height: 50rpx;">
-						<input class="ml-2" type="number" :value="orderNumber" placeholder="订单号" maxlength="20" @input="orderNum"/>
-					</view>
+		<view class="border-bottom w-100 d-flex flex-column a-center"  style="height:240rpx;">
+			<view class="w-100 d-flex flex-row a-center ml-2" style="height: 80rpx;">
+				<view class="border font-30"  style="width: 200rpx; height: 50rpx;">
+					<input class="ml-2" type="number" :value="orderNumber" placeholder="订单号" maxlength="20" @input="orderNum"/>
+				</view>
+				
+				<input class="ml-1 border font-30" style="width: 200rpx; height: 50rpx;" type="text" :value="tableNumber"
+				placeholder="桌子号" maxlength="5" @input="tableNum"/>
+			</view>
+			
+			<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
+				<view class="d-flex flex-row a-center" style="width: 70%;">
+					<time-selector showType="date" @btnConfirm="btnConfirmBegin">
+						<view class="border font-26 ml-2" style="color: #999999; height: 50rpx; width: 180rpx;">{{beginDate}}</view>
+					</time-selector>
 					
-					<input class="ml-1 border font-30" style="width: 200rpx; height: 50rpx;" type="text" :value="tableNumber"
-					placeholder="桌子号" maxlength="5" @input="tableNum"/>
+					<view class="font-26 text-center" style="width: 30rpx; height: 40rpx;">-</view>
+					
+					<time-selector showType="date" @btnConfirm="btnConfirmEnd">
+						<view class="border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{endDate}}</view>
+					</time-selector>
 				</view>
-				
-				<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
-					<view class="d-flex flex-row a-center" style="width: 70%;">
-						<time-selector showType="date" @btnConfirm="btnConfirmBegin">
-							<view class="border font-26 ml-2" style="color: #999999; height: 50rpx; width: 180rpx;">{{beginDate}}</view>
-						</time-selector>
-						
-						<view class="font-26 text-center" style="width: 30rpx; height: 40rpx;">-</view>
-						
-						<time-selector showType="date" @btnConfirm="btnConfirmEnd">
-							<view class="border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{endDate}}</view>
-						</time-selector>
-					</view>
 
-					<view class="d-flex flex-row a-center j-end" style="width: 30%;">
-						<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空</view>
-						<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询</view>
-					</view>
-				</view>
-				
-				<view class="w-100 d-flex flex-row j-end a-center ml-2 flex-wrap" style="height: 80rpx;">
-					<block v-for="(item, index) in defaultStatus" :key="index">
-						<view class="mr-2 mt-1 mb pl-1 pr-1 font-26 border rounded position-relative"
-						:style="item.Value == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
-						@click="switchStatus(item.Value)">
-							{{item.Text}}
-							<view class="position-absolute rounded-circle" v-if="item.ViewStatus == 1"
-							style="width: 15rpx; height: 15rpx; background-color: red; right: 2rpx; top: 2rpx;"></view>
-						</view>
-					</block>
-					<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refresh">刷新</view>
+				<view class="d-flex flex-row a-center j-end" style="width: 30%;">
+					<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空</view>
+					<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询</view>
 				</view>
 			</view>
 			
-			<scroll-view scroll-y :croll-with-animation="true" :style="'height:'+(totalH - 120)+'px;'" v-if="orderList.length > 0" @scrolltolower="loadMore">
-				<view class="" v-for="(item,index) in orderList" :key="index">
-					<order-item :item="item" :statusList="defaultStatus"></order-item>
-				</view>
-				<view class="d-flex a-center j-center text-light-muted font-md py-3">{{ loadText }}</view>
-			</scroll-view>
-			<!-- 空数据 -->
-			<view v-else class="d-flex j-center a-center pt-5">
-				<text class="font-md text-light-muted">暂无数据</text>
+			<view class="w-100 d-flex flex-row j-end a-center ml-2 flex-wrap" style="height: 80rpx;">
+				<block v-for="(item, index) in defaultStatus" :key="index">
+					<view class="mr-2 mt-1 mb pl-1 pr-1 font-26 border rounded position-relative"
+					:style="item.Value == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
+					@click="switchStatus(item.Value)">
+						{{item.Text}}
+						<view class="position-absolute rounded-circle" v-if="item.ViewStatus == 1"
+						style="width: 15rpx; height: 15rpx; background-color: red; right: 2rpx; top: 2rpx;"></view>
+					</view>
+				</block>
+				<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refreshOrder">刷新</view>
 			</view>
-		</refresh>
+		</view>
+
+		<page-content widthTab refresher infiniting @on-refresh="refresh" @on-infinite="infiniteScroll" class="page-content" 
+		:scrollheight="(totalH - 120)">
+			<view class="" v-for="(item,index) in orderList" :key="index">
+				<order-item :item="item" :statusList="defaultStatus"></order-item>
+			</view>
+		</page-content>
 	</view>
 </template>
 	
 <script>
 	import orderItem from "@/components/order/order-item.vue"
 	import timeSelector from "@/components/time-selector/time-selector.vue"
-	import refresh from '@/components/common/refresh.vue'
+	import pageContent from '@/components/uni-scrollview/uni-scrollview.vue'
 	
 	import {mapState, mapGetters, mapActions, mapMutations} from "vuex"
 	export default {
 		components:{
 			orderItem,
 			timeSelector,
-			refresh
+			pageContent
 		},
 		data() {
 			return {
@@ -87,8 +81,7 @@
 				endDate:'结束时间',
 				orderNumber:'',
 				tableNumber:'',
-				statusID: 99,
-				loadText: '上拉加载更多'
+				statusID: 99
 			}
 		},
 		onLoad() {
@@ -119,6 +112,18 @@
 			]),
 			...mapActions([
 			]),
+			refresh({ complete }) {
+				setTimeout(() => {
+					complete()
+					this.refreshOrder()
+				}, 1000);
+			},
+			infiniteScroll({ setStatus }) {
+				setTimeout(() => {
+					this.loadMore()
+					setStatus('noMore', this.orderList.length > this.defaultItemCount ? true : false)
+				}, 1000);
+			},
 			getTimeScope(){
 				var _self = this
 				_self.$H.post('/API/order/OrderQueryDefaultTime', {}, {
@@ -189,7 +194,7 @@
 				this.defaultPageIndex = 1
 				this.requestData('check')
 			},
-			refresh(){
+			refreshOrder(){
 				this.defaultPageIndex = 1
 				this.requestData('refresh')
 			},
@@ -250,24 +255,11 @@
 						}else{
 							_self.updateOrderList(res.data)
 						}
-						_self.isHaveMore()
 						_self.getStatusList()
 					}else{	
 						uni.showToast({title:res.message, icon:'none', duration:1500})
 					}
 				})
-			},
-			isHaveMore(){
-				let m_index = this.orderList.length
-				if(m_index < this.defaultPageIndex * this.defaultItemCount){
-					this.loadText = '没有更多了'
-				}else{
-					this.loadText = '上拉加载更多'
-				}
-			},
-			refreshList() {
-				this.refresh()
-				this.$refs.refresh.endAfter()	
 			},
 			// 获取是否有订单未查看
 			getStatusList(){

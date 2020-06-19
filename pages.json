@@ -220,8 +220,7 @@
 				"navigationBarTitleText": "账单明细",
 				"enablePullDownRefresh": true
 			}
-        }
-        ,{
+        },{
             "path" : "pages/bill/bill-info",
             "style" : {}
         }

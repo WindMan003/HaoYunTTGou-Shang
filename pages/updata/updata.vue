@@ -68,10 +68,10 @@
 					return
 				}
 				
-				if(versions[0] > currentVersions[0]){
+				if(Number(versions[0]) > Number(currentVersions[0])){
 					// 有大版本更新
 					this.versionUpdate(versionUrl)
-				}else if(hotVersions[1] > currentVersions[1] || hotVersions[2] > currentVersions[2]){
+				}else if(Number(hotVersions[1]) > Number(currentVersions[1]) || Number(hotVersions[2]) > Number(currentVersions[2])){
 					// 有热更新
 					this.hotUpdate(data.HotUpdateUrl, data.HotUpdateVersion)
 				}else{

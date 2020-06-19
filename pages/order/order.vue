@@ -6,33 +6,36 @@
 		</view> -->
 		
 		<refresh ref="refresh" @isRefresh="refreshList">
-			<view class="border-bottom w-100 d-flex flex-column a-center"  style="height:200rpx;">
+			<view class="border-bottom w-100 d-flex flex-column a-center"  style="height:240rpx;">
 				<view class="w-100 d-flex flex-row a-center ml-2" style="height: 80rpx;">
-					<view class="border font-30 d-flex a-center"  style="width: 180rpx; height: 50rpx;">
-						<input class="ml-1" type="number" :value="orderNumber" placeholder="订单号" maxlength="20" @input="orderNum"/>
+					<view class="border font-30"  style="width: 200rpx; height: 50rpx;">
+						<input class="ml-2" type="number" :value="orderNumber" placeholder="订单号" maxlength="20" @input="orderNum"/>
 					</view>
 					
-					<input class="ml-1 border font-30" style="width: 100rpx; height: 50rpx;" type="text" :value="tableNumber"
+					<input class="ml-1 border font-30" style="width: 200rpx; height: 50rpx;" type="text" :value="tableNumber"
 					placeholder="桌子号" maxlength="5" @input="tableNum"/>
-					
-					<time-selector showType="date" @btnConfirm="btnConfirmBegin">
-						<view class="ml-3 border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{beginDate}}</view>
-					</time-selector>
-					
-					<view class="font-26 text-center" style="width: 30rpx; height: 40rpx;">-</view>
-					
-					<time-selector showType="date" @btnConfirm="btnConfirmEnd">
-						<view class="border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{endDate}}</view>
-					</time-selector>
 				</view>
 				
-				<view class="w-100 d-flex flex-row a-center" style="height: 60rpx;">
-					<view class="ml-1 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空刷新</view>
-					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询订单</view>
-					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refresh">刷新列表</view>
+				<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
+					<view class="d-flex flex-row a-center" style="width: 70%;">
+						<time-selector showType="date" @btnConfirm="btnConfirmBegin">
+							<view class="border font-26 ml-2" style="color: #999999; height: 50rpx; width: 180rpx;">{{beginDate}}</view>
+						</time-selector>
+						
+						<view class="font-26 text-center" style="width: 30rpx; height: 40rpx;">-</view>
+						
+						<time-selector showType="date" @btnConfirm="btnConfirmEnd">
+							<view class="border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{endDate}}</view>
+						</time-selector>
+					</view>
+
+					<view class="d-flex flex-row a-center j-end" style="width: 30%;">
+						<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空</view>
+						<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询</view>
+					</view>
 				</view>
 				
-				<view class="w-100 d-flex flex-row j-end a-center ml-2 flex-wrap" style="height: 70rpx;">
+				<view class="w-100 d-flex flex-row j-end a-center ml-2 flex-wrap" style="height: 80rpx;">
 					<block v-for="(item, index) in defaultStatus" :key="index">
 						<view class="mr-2 mt-1 mb pl-1 pr-1 font-26 border rounded position-relative"
 						:style="item.Value == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
@@ -42,10 +45,11 @@
 							style="width: 15rpx; height: 15rpx; background-color: red; right: 2rpx; top: 2rpx;"></view>
 						</view>
 					</block>
+					<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refresh">刷新</view>
 				</view>
 			</view>
 			
-			<scroll-view scroll-y :croll-with-animation="true" :style="'height:'+(totalH - 100)+'px;'" v-if="orderList.length > 0" @scrolltolower="loadMore">
+			<scroll-view scroll-y :croll-with-animation="true" :style="'height:'+(totalH - 120)+'px;'" v-if="orderList.length > 0" @scrolltolower="loadMore">
 				<view class="" v-for="(item,index) in orderList" :key="index">
 					<order-item :item="item" :statusList="defaultStatus"></order-item>
 				</view>
@@ -95,7 +99,7 @@
 			})
 		},
 		onShow() {
-			this.getOrderStatus()
+			this.getTimeScope()
 		},
 		computed:{
 			...mapState({
@@ -115,6 +119,25 @@
 			]),
 			...mapActions([
 			]),
+			getTimeScope(){
+				var _self = this
+				_self.$H.post('/API/order/OrderQueryDefaultTime', {}, {
+					token:true
+				}).then(res=>{
+					console.log(res)
+					if(res.status == 0){
+						if(_self.beginDate == '起始时间'){
+							_self.beginDate = res.data.StartTime
+						}
+						if(_self.endDate == '结束时间'){
+							_self.endDate = res.data.EndTime
+						}
+						_self.getOrderStatus()
+					}else{
+						_self.$Common.showToast(res)
+					}
+				})
+			},
 			getOrderStatus(){
 				var _self = this
 				_self.$H.post('/api/order/OrderStatus', {
@@ -133,7 +156,7 @@
 						_self.defaultPageIndex = 1
 						_self.requestData()
 					}else{
-						uni.showToast({title:res.message, icon:'none', duration:1500})
+						_self.$Common.showToast(res)
 					}
 				})
 			},
@@ -163,22 +186,20 @@
 					})
 					return
 				}
-				this.requestData()
+				this.defaultPageIndex = 1
+				this.requestData('check')
 			},
 			refresh(){
 				this.defaultPageIndex = 1
 				this.requestData('refresh')
 			},
 			switchStatus(index){
-				console.log(this.statusID)
-				console.log(index)
 				if(this.statusID == index){
 					this.statusID = 99
 				}else{
 					this.statusID = index
 				}
-				console.log(this.statusID)
-				console.log(index)
+
 				this.defaultPageIndex = 1
 				this.requestData()
 			},
@@ -220,6 +241,9 @@
 						}
 						if(className == 'clear'){
 							uni.showToast({title:'清空查询成功', icon:'none', duration:1500})
+						}
+						if(className == 'check'){
+							uni.showToast({title:'查询成功', icon:'none', duration:1500})
 						}
 						if(className == 'loadMore'){
 							_self.pushUpdateOrderList(res.data)

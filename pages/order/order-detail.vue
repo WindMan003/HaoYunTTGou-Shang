@@ -6,7 +6,7 @@
 					<view class="d-flex flex-row" style="width: 50%;">
 						<view class="font-26 font-weight">订单号:</view>
 						<view class="font-26 ml-1">{{OrderItem.ID}}</view>
-						<view class="font-26 ml-1" style="color: #FF582B;">({{getStatusText(OrderItem.Status)}})</view>
+						<view class="font-26 ml-1" style="color: #FF582B;">({{OrderItem.StatusText}})</view>
 					</view>
 					<view class="d-flex flex-row" style="width: 50%;">
 						<view class="font-26 font-weight">桌号:</view>
@@ -17,13 +17,6 @@
 					</view>
 				</view>
 			
-<!-- 				<view class="w-100 d-flex flex-row a-center ml-1 mt-1">
-					<view class="d-flex flex-row" style="width: 60%;">
-						<view class="font-26 font-weight">用户昵称:</view>
-						<view class="font-26 ml-1">{{OrderItem.UserNickName}}</view>
-					</view>
-				</view> -->
-				
 				<view class="w-100 d-flex flex-row a-center ml-1 mt-1">
 					<view class="font-26 border pl-1 pr-1 btn-blue-white" @click="selectAll">全选</view>
 					<view class="font-26 border pl-1 pr-1 ml-3 btn-blue-white" @click="setStatusSubmit">设置已上</view>
@@ -116,7 +109,6 @@
 		data() {
 			return {
 				totalH:0,
-				defaultStatus:["未确认","进行中","支付中","已完成","用户取消","商户取消"],
 				statusText: '',
 				OrderItem:[],
 				ProductList:[],
@@ -193,7 +185,7 @@
 				var _self = this
 				let postData = { OrderID:_self.OrderItem.ID }
 				_self.$H.post('/api/order/PrintCount', postData, {
-					token:true
+					token: true
 				}).then(res=>{
 					console.log(res)
 					if(res.status == 0){
@@ -236,10 +228,6 @@
 				}
 				this.ProductList.reverse()
 				console.log(this.ProductList)
-			},
-			getStatusText(index){
-				this.statusText = this.defaultStatus[index]
-				return this.statusText
 			},
 			getDishesStatus(index){
 				if(index == 0){

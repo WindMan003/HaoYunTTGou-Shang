@@ -27,16 +27,14 @@
 				</view>
 				
 				<view class="w-100 d-flex flex-row a-center" style="height: 60rpx;">
-					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空条件</view>
+					<view class="ml-1 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空刷新</view>
 					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询订单</view>
 					<view class="ml-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refresh">刷新列表</view>
-					<!-- <view class="font-26 border rounded-10 pl-1 pr-1 position-absolute btn-orange-white text-center"
-					style="right: 15rpx;" @click="employeeLoginOut">退出登录</view> -->
 				</view>
 				
-				<view class="w-100 d-flex flex-row a-center ml-2 flex-wrap" style="height: 60rpx;">
+				<view class="w-100 d-flex flex-row j-end a-center ml-2 flex-wrap" style="height: 70rpx;">
 					<block v-for="(item, index) in defaultStatus" :key="index">
-						<view class="ml-1 mt mb pl pr font-26 border rounded position-relative"
+						<view class="mr-2 mt-1 mb pl-1 pr-1 font-26 border rounded position-relative"
 						:style="item.Value == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
 						@click="switchStatus(item.Value)">
 							{{item.Text}}
@@ -172,11 +170,15 @@
 				this.requestData('refresh')
 			},
 			switchStatus(index){
+				console.log(this.statusID)
+				console.log(index)
 				if(this.statusID == index){
 					this.statusID = 99
 				}else{
 					this.statusID = index
 				}
+				console.log(this.statusID)
+				console.log(index)
 				this.defaultPageIndex = 1
 				this.requestData()
 			},
@@ -193,20 +195,20 @@
 			requestData(className){
 				var _self = this;
 				var uploadList = {PageIndex: _self.defaultPageIndex};
-				if(this.orderNumber != ''){
-					uploadList.OrderID = this.orderNumber
+				if(_self.orderNumber != ''){
+					uploadList.OrderID = _self.orderNumber
 				}
-				if(this.tableNumber != ''){
-					uploadList.TableNumber = this.tableNumber
+				if(_self.tableNumber != ''){
+					uploadList.TableNumber = _self.tableNumber
 				}
-				if(this.beginDate != '起始时间'){
-					uploadList.StartTime = this.beginDate
+				if(_self.beginDate != '起始时间'){
+					uploadList.StartTime = _self.beginDate
 				}
-				if(this.endDate != '结束时间'){
-					uploadList.EndTime = this.endDate
+				if(_self.endDate != '结束时间'){
+					uploadList.EndTime = _self.endDate
 				}
-				if(this.statusID != 99){
-					uploadList.Status = this.statusID
+				if(_self.statusID != 99){
+					uploadList.Status = _self.statusID
 				}
 				_self.$H.post('/api/Order/List', uploadList, {
 					token:true
@@ -250,6 +252,9 @@
 					if(temp[i].ViewStatus == 0){
 						for (let j = 0; j < this.defaultStatus.length; j++) {
 							if(this.defaultStatus[j].Value == temp[i].Status){
+								this.defaultStatus[j].ViewStatus = 1
+								break
+							}else if(this.defaultStatus[j].Value == 10 && (temp[i].Status == 4 || temp[i].Status == 5)){
 								this.defaultStatus[j].ViewStatus = 1
 								break
 							}

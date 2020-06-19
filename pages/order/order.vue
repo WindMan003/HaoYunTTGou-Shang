@@ -1,5 +1,5 @@
 <template>
-	<view class="main w-100">
+	<view class="w-100 d-flex flex-column position-fixed">
 <!-- 		<view class="mt-1 position-relative" style="height:80rpx;">
 			<view class="font-26 border rounded-10 pl-1 pr-1 position-absolute btn-orange-white text-center" 
 			style="right: 15rpx;" @click="employeeLoginOut">退出登录</view>

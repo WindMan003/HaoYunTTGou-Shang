@@ -191,7 +191,22 @@
         },{
             "path" : "pages/webview/webview",
             "style" : {
-				
+				"app-plus":{
+					"scrollIndicator":"none",
+					"bounce":"none",
+					"titleNView":{
+						"buttons":[
+							{
+								"color":"#989898",
+								"colorPressed":"#FD6801",
+								"float":"left",
+								"fontSize":"22px",
+								"fontSrc":"/static/font/iconfont.ttf",
+								"text":"\ue67a"
+							}
+						]
+					}
+				}
 			}
         },{
             "path" : "pages/prize/prize",
@@ -223,6 +238,18 @@
         },{
             "path" : "pages/bill/bill-info",
             "style" : {}
+        }
+        ,{
+            "path" : "pages/binddevice/binddevice",
+            "style" : {
+				"navigationBarTitleText": "绑定设备"
+			}
+        }
+        ,{
+            "path" : "pages/binddevice/bind-newdevice",
+            "style" : {
+				"navigationBarTitleText": "绑定"
+			}
         }
     ],
 	"globalStyle": {

@@ -9,7 +9,7 @@
 				<block v-if="!isIOSshenhe">
 					<uni-list-item title="联系代理" @click="navigate('webview', true, 'action=/Agent/MyAgent')"></uni-list-item>
 				</block>
-				<!-- <uni-list-item title="设备连接" @click="navigate('bleConnect', false)"></uni-list-item> -->
+				<uni-list-item title="绑定打印设备" @click="navigate('webview', true, 'action=/Print/Index')"></uni-list-item>
 				<divider></divider>
 				<!-- <uni-list-item title="关于我们" @click="navigate('merchant', true, 'isChange=0')"></uni-list-item> -->
 				<uni-list-item title="修改密码" @click="modifyPaaword"></uni-list-item>

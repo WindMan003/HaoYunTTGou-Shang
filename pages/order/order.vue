@@ -49,7 +49,7 @@
 		</view>
 
 		<page-content widthTab refresher infiniting @onrefresh="refresh" @oninfinite="infiniteScroll" class="page-content" 
-		:scrollheight="(totalH - 120)">
+		:scrollheight="totalH">
 			<view class="" v-for="(item,index) in orderList" :key="index">
 				<order-item :item="item" :statusList="defaultStatus"></order-item>
 			</view>
@@ -87,12 +87,12 @@
 		onLoad() {
 			uni.getSystemInfo({
 				success: (res) => {
-					this.totalH = res.windowHeight
+					this.totalH = res.windowHeight - uni.upx2px(240)
 				}
 			})
+			this.getTimeScope()
 		},
 		onShow() {
-			this.getTimeScope()
 		},
 		computed:{
 			...mapState({

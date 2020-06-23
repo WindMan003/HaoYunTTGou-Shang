@@ -100,15 +100,19 @@
 						}else{
 							_self.loadingTxt = '上拉加载更多'
 						}
+						
+						if(m_text == 'loadmore' && res.data.length > 0){
+							for (var i = 0; i < res.data.length; i++) {
+								_self.billList.push(res.data[i])
+							}
+							return
+						}
+						
 						if(m_text == 'refresh'){
 							uni.showToast({title: '刷新成功', icon:'none', duration:1000})
 						}
-						
-						if(m_text == 'loadmore' && res.data.length > 0){
-							_self.billList.push(res.data)
-						}else{
-							_self.billList = res.data
-						}
+
+						_self.billList = res.data
 					}else{
 						_self.$Common.showToast(res)
 					}

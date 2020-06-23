@@ -138,7 +138,9 @@
 						}
 						
 						if(m_text == 'loadmore' && res.data.length > 0){
-							_self.takeList.push(res.data)
+							for (var i = 0; i < res.data.length; i++) {
+								_self.takeList.push(res.data[i])
+							}
 						}else{
 							_self.takeList = res.data
 						}

@@ -73,7 +73,7 @@
 					<view class="d-flex flex-row" style="width: 55%;">
 						<block v-if="getShowPrint">
 							<view class="d-flex a-center flex-row font-26">
-								<view class="border pl-1 pr-1 ml-1 btn-orange-white" @click="printOrder(-1)">打印订单</view>
+								<view class="border pl-1 pr-1 ml-1 btn-orange-white" @click="printOrder(0)">打印订单</view>
 								<view class="ml-3">已打印{{printCount}}次</view>
 							</view>
 						</block>
@@ -412,39 +412,27 @@
 				});
 			},
 			printOrder(m_around){
-				var _self = this
-				if(_self.BLEInformation.writeServiceId == ''){
-					uni.showModal({
-					    title: '提示',
-					    content: '您没有连接打印设备,是否去连接',
-					    success: function (res) {
-					        if (res.confirm) {
-								uni.navigateTo({
-									url:'../bleConnect/bleConnect'
-								})
-					        }
-					    }
-					});
-				}else{
-					_self.gotoPrintOrder(m_around)
-				}
+				// var _self = this
+				// if(_self.BLEInformation.writeServiceId == ''){
+				// 	uni.showModal({
+				// 	    title: '提示',
+				// 	    content: '您没有连接打印设备,是否去连接',
+				// 	    success: function (res) {
+				// 	        if (res.confirm) {
+				// 				uni.navigateTo({
+				// 					url:'../bleConnect/bleConnect'
+				// 				})
+				// 	        }
+				// 	    }
+				// 	});
+				// }else{
+				// 	_self.gotoPrintOrder(m_around)
+				// }
+				this.gotoPrintOrder(Number(m_around))
 			},
 			gotoPrintOrder(m_around){
 				var _self = this
 				var printOrderLit = _self.ProductList
-				console.log('aaaaaaaaaa')
-				console.log(m_around)
-				if(m_around > 0){
-					console.log('sssssssssssssssssssssss')
-					for (let i = 0; i < _self.ProductList.length; i++) {
-						if(_self.ProductList[i].addRound == m_around){
-							printOrderLit = _self.ProductList[i]
-							break
-						}
-					}
-					_self.$refs.sendCommand.receiptAddOrder(_self.OrderItem, printOrderLit, _self.statusText)
-					return
-				}
 
 				if(_self.printCount > 0){
 					uni.showModal({
@@ -452,15 +440,33 @@
 						content: '订单已打印'+_self.printCount+'次,继续打印?',
 						success: function (res) {
 							if (res.confirm) {
-								_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+								// _self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+								_self.printOrderSure(m_around)
 							} else if (res.cancel) {
 								console.log('用户点击取消');
 							}
 						}
 					});
 				}else{
-					_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+					// _self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.statusText)
+					_self.printOrderSure(m_around)
 				}
+			},
+			printOrderSure(m_around){
+				var _self = this;
+				_self.$H.post('/API/Order/PrintOrder',{
+					OrderID: _self.OrderItem.ID,
+					AddRound: m_around
+				},{
+					token:true
+				}).then(res=>{
+					console.log(res)
+					if(res.status == 0){
+						_self.printComplete()
+					}else{
+						_self.$Common.showToast(res)
+					}
+				})
 			},
 			printComplete(){
 				console.log('打印完成，回调结束')

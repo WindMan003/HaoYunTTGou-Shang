@@ -51,7 +51,8 @@
 			<view class="d-flex flex-row a-center ml-1 j-end">
 				<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="checkPayStatus" v-if="item.Status == 2">查询支付</view>
 				<!-- <view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="printOrder" v-if="item.Status == 2">查询支付</view> -->
-				<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="printOrder" v-if="item.Status == 3 || item.Status == 1">打印订单</view>
+				<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="printOrder(item.PrintCount)" 
+				v-if="item.Status == 3 || item.Status == 1">打印订单</view>
 			</view>
 		</view>
 
@@ -73,7 +74,7 @@
 		data() {
 			return {
 				OrderItem: [],
-				ProductList: []
+				ProductList: [],
 			}
 		},
 		props:{
@@ -176,25 +177,26 @@
 					duration:1500
 				})
 			},
-			printOrder(){
-				var _self = this
-				if(_self.BLEInformation.writeServiceId == ''){
-					uni.showModal({
-					    title: '提示',
-					    content: '您没有连接打印设备,是否去连接',
-					    success: function (res) {
-					        if (res.confirm) {
-								uni.navigateTo({
-									url:'../bleConnect/bleConnect'
-								})
-					        }
-					    }
-					});
-				}else{
-					_self.getOrderDetail()
-				}
+			printOrder(printCount){
+				this.getOrderDetail(printCount)
+				// var _self = this
+				// if(_self.BLEInformation.writeServiceId == ''){
+				// 	uni.showModal({
+				// 	    title: '提示',
+				// 	    content: '您没有连接打印设备,是否去连接',
+				// 	    success: function (res) {
+				// 	        if (res.confirm) {
+				// 				uni.navigateTo({
+				// 					url:'../bleConnect/bleConnect'
+				// 				})
+				// 	        }
+				// 	    }
+				// 	});
+				// }else{
+				// 	_self.getOrderDetail()
+				// }
 			},
-			getOrderDetail(){
+			getOrderDetail(printCount){
 				var _self = this;
 				_self.$H.post('/api/Order/Detail',{
 					OrderID: _self.item.ID
@@ -205,7 +207,7 @@
 					if(res.status == 0){
 						_self.OrderItem = res.data.OrderItem
 						_self.tidyProductList(res.data.ProductList)
-						_self.gotoPrintOrder()
+						_self.gotoPrintOrder(printCount)
 					}else{
 						_self.$Common.showToast(res)
 					}
@@ -226,25 +228,43 @@
 				}
 				this.ProductList.reverse()
 			},
-			gotoPrintOrder(){
+			gotoPrintOrder(printCount){
 				var _self = this
 				var printOrderLit = _self.ProductList
 			
-				if(_self.printCount > 0){
+				if(Number(printCount) > 0){
 					uni.showModal({
 						title: '提示',
-						content: '订单已打印'+_self.printCount+'次,继续打印?',
+						content: '订单已打印'+printCount+'次,继续打印?',
 						success: function (res) {
 							if (res.confirm) {
-								_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
+								// _self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
+								_self.printOrderSure()
 							} else if (res.cancel) {
 								console.log('用户点击取消');
 							}
 						}
 					});
 				}else{
-					_self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
+					// _self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
+					_self.printOrderSure()
 				}
+			},
+			printOrderSure(){
+				var _self = this;
+				_self.$H.post('/API/Order/PrintOrder',{
+					OrderID: _self.item.ID,
+					AddRound: 0
+				},{
+					token:true
+				}).then(res=>{
+					console.log(res)
+					if(res.status == 0){
+						_self.printComplete()
+					}else{
+						_self.$Common.showToast(res)
+					}
+				})
 			},
 			printComplete(){
 				console.log('打印完成，回调结束')

@@ -191,22 +191,7 @@
         },{
             "path" : "pages/webview/webview",
             "style" : {
-				"app-plus":{
-					"scrollIndicator":"none",
-					"bounce":"none",
-					"titleNView":{
-						"buttons":[
-							{
-								"color":"#989898",
-								"colorPressed":"#FD6801",
-								"float":"left",
-								"fontSize":"22px",
-								"fontSrc":"/static/font/iconfont.ttf",
-								"text":"\ue67a"
-							}
-						]
-					}
-				}
+				
 			}
         },{
             "path" : "pages/prize/prize",

@@ -19,9 +19,6 @@
 				<product-info :totalH="swiperH"></product-info>
 			</swiper-item>
 		</swiper>
-		<!-- <view style="display: none;"> -->
-			<web-view :webview-styles="webviewStyles" :src="getLink"></web-view>
-		<!-- </view> -->
 	</view>
 </template>
 
@@ -67,16 +64,10 @@
 			...mapState({
 				goodsTypeList:state=>state.goods.goodsTypeList,
 				goodsList:state=>state.goods.goodsList,
-				signkey:state=>state.user.signkey,
-				merchantSite:state=>state.user.merchantSite
+				signkey:state=>state.user.signkey
 			}),
 			...mapGetters([
 			]),
-			getLink(){
-				var link = this.merchantSite + '/User/Logout'
-				console.log(link)
-				return link
-			}
 		},
 		methods: {
 			...mapMutations([

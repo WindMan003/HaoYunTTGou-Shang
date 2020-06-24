@@ -19,6 +19,9 @@
 				<product-info :totalH="swiperH"></product-info>
 			</swiper-item>
 		</swiper>
+		<!-- <view style="display: none;"> -->
+			<web-view :webview-styles="webviewStyles" :src="getLink"></web-view>
+		<!-- </view> -->
 	</view>
 </template>
 
@@ -42,7 +45,12 @@
 				categoryList: [
 					{name:'类别'},
 					{name:'产品'}
-				]
+				],
+				webviewStyles: {
+					progress: {
+						color: '#FF3333'
+					}
+				}
 			}
 		},
 		onLoad() {
@@ -60,9 +68,15 @@
 				goodsTypeList:state=>state.goods.goodsTypeList,
 				goodsList:state=>state.goods.goodsList,
 				signkey:state=>state.user.signkey,
+				merchantSite:state=>state.user.merchantSite
 			}),
 			...mapGetters([
 			]),
+			getLink(){
+				var link = this.merchantSite + '/User/Logout'
+				console.log(link)
+				return link
+			}
 		},
 		methods: {
 			...mapMutations([
@@ -155,6 +169,7 @@
 				JSON.stringify({action:'startOrder', merchantID:this.merchantID, cartID:this.cartId, token:this.token}),
 				this.appConfig.WebSocketUrl)
 			},
+			
 		}
 	}
 </script>

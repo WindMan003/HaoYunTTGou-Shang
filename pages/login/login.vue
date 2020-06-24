@@ -9,11 +9,11 @@
 		<view class="d-flex flex-row border-bottom pb-1">
 			<view class="" style="width: 10%;"></view>
 			<view class="font-32 text-center" style="width: 40%;" @click="loginType1"
-			:class="loginType == 1 ? 'font-weight main-text-selected-color':''">
+			:class="loginType == 1 ? 'font-weight text-OrangeRed':''">
 				账号密码登录
 			</view>
 			<view class="font-32 text-center" style="width: 40%;" @click="loginType2"
-			:class="loginType == 2 ? 'font-weight main-text-selected-color':''">
+			:class="loginType == 2 ? 'font-weight text-OrangeRed':''">
 				手机验证登录
 			</view>
 			

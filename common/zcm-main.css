@@ -1,5 +1,6 @@
 /* 防止图片闪一下 */
-image{will-change: transform}
+image{ will-change: transform; }
+
 /* scroll-view */
 .scroll-row{ width: 100%;white-space: nowrap; }
 .scroll-row-item{ display: inline-block; }
@@ -39,8 +40,8 @@ body{
 .bottom-0{ bottom: 0; }
 .right-0{ right: 0; }
 /* 宽高 */
-.w-100{ width: 750rpx;}
-.w-50{ width: 375rpx;}
+.w-100{ width: 100%;}
+.w-50{ width: 50%;}
 .h-100{ height: 100%;}
 .h-50{ width: 50%; }
 /* 字体 */
@@ -220,6 +221,8 @@ body{
 .text-muted{ color: var(--muted)!important; }
 .text-light-muted{ color: var(--lightmuted)!important; }
 .text-white{ color: var(--white)!important; }
+.text-OrangeRed{ color: #FF4500; }
+.text-Grey{ color: #BEBEBE; }
 
 .bg-primary{ background-color:var(--primary)!important; }
 .bg-secondary{ background-color:var(--secondary)!important; }

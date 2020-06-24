@@ -1,11 +1,11 @@
 <template>
 	<view class="main">
-		<view class="w-100 main-bg-color border-bottom position-relative" style="height: 80rpx;">
+		<view class="w-100 border-bottom position-relative" style="height: 80rpx;">
 			<view class="d-flex flex-row">
 				<view class="d-flex flex-row a-center j-center font-32"
 				style="width: 120rpx; height: 80rpx;"
 				v-for="(item,index) in categoryList" :key="index" @click="changeTab(index)">
-					<text :class="tabIndex === index ? 'border-bottom-6 border-bottom-orange font-weight':'main-text-color'">
+					<text :class="tabIndex === index ? 'border-bottom-6 border-bottom-orange font-weight':'text-Grey'">
 						{{item.name}}
 					</text>
 				</view>

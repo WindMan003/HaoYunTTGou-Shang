@@ -3,7 +3,7 @@
 		<view class="d-flex flex-row pb-1 mt-5 j-sa border-bottom">
 			<block v-for="(item, index) in takeTypeList" :key="index">
 				<view class="font-32 text-center" @click="changeTakeType(index)"
-				:class="takeType == index ? 'font-weight main-text-selected-color':''">
+				:class="takeType == index ? 'font-weight text-OrangeRed':''">
 					{{item.Text}}
 				</view>
 			</block>

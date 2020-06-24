@@ -261,12 +261,12 @@
 				"iconPath":"static/tabbar/order.png",
 				"selectedIconPath":"static/tabbar/orderSelected.png"
 			},
-			// {
-			// 	"pagePath":"pages/prize/prize",
-			// 	"text":"抽奖",
-			// 	"iconPath":"static/tabbar/order.png",
-			// 	"selectedIconPath":"static/tabbar/orderSelected.png"
-			// },
+			{
+				"pagePath":"pages/prize/prize",
+				"text":"活动",
+				"iconPath":"static/tabbar/activity.png",
+				"selectedIconPath":"static/tabbar/activitySelected.png"
+			},
 			{
 				"pagePath":"pages/my/my",
 				"text":"我的",

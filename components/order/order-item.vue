@@ -1,65 +1,44 @@
 <template>
-	<view class="w-100 d-flex flex-row border-bottom p-1">
-		<view class="w-100 ml-1 d-flex flex-column">
-			<view class="" @click="orderDetail">
-				<view class="w-100 d-flex flex-row a-center ml-1">
-					<view class="d-flex flex-row" style="width: 40%;">
-						<view class="font-26 font-weight">订单号：</view>
-						<view class="font-26 ml">{{item.ID}}</view>
+	<view class="w-100 d-flex flex-row a-center j-center">
+		<view class="d-flex flex-row border p-1 rounded-10 bg-white" style="width: 92%;">
+			<view class="w-100 ml-1 d-flex flex-column">
+				<view class="w-100" @click="orderDetail">
+					<view class="d-flex flex-row j-sb border-bottom pb">
+						<view class="font-weight">桌子号：{{item.TableNumber}}</view>
+						<view class="rounded-10 pl-1 pr-1 text-OrangeRed">{{item.StatusText}}</view>
 					</view>
-					<view class="d-flex flex-row" style="width: 60%;">
-						<view class="font-26 font-weight">状态：</view>
-						<view class="font-26 ml">{{item.StatusText}}</view>
+					<view class="d-flex flex-row a-center j-sb mt">
+						<view class="">订单号：{{item.ID}}</view>
+						<view class="text-price" v-if="item.AddStatus == 1">(加菜未确认)</view>
 					</view>
-				</view>
-				
-				<view class="d-flex flex-row a-center ml-1">
-					<view class="d-flex flex-row" style="width: 40%;">
-						<view class="font-26 font-weight">桌子号：</view>
-						<view class="font-26 ml">{{item.TableNumber}}</view>
+					<view class="">下单时间：{{item.CreateTime}}</view>
+					<view class="d-flex flex-row">
+						<view class="">金额：</view>
+						<view class="text-price">{{'￥'+item.Amount}}</view>
 					</view>
-					<view class="d-flex flex-row" style="width: 60%;">
-						<view class="font-26" v-if="item.AddStatus == 1 && item.Status == 1" 
-						style="color: #FF582B;">(加菜未确认)</view>
-					</view>
-				</view>
-				
-				<view class="d-flex flex-row a-center ml-1">
-					<view class="d-flex flex-row" style="width: 40%;">
-						<view class="font-26 font-weight">金额：</view>
-						<view class="font-26 ml" style="color: #FF582B;">￥{{item.Amount}}</view>
-					</view>
-					<view class="d-flex flex-row" style="width: 60%;">
-						<view class="font-26 font-weight">时间：</view>
-						<view class="font-26 ml">{{item.CreateTime}}</view>
-					</view>
-				</view>
-				
-				<view class="d-flex flex-row a-center ml-1">
-					<view class="d-flex flex-row" style="width: 50%;">
-						<view class="font-26 font-weight">是否打印：</view>
-						<view class="font-26 mr-3 d-flex flex-row" v-if="item.PrintCount == 0">
-							<text class="" style="color: #FD6801;">未打印</text>
+					<view class="d-flex flex-row">
+						<view class="">是否打印：</view>
+						<view class="mr-3 d-flex flex-row" v-if="item.PrintCount == 0">
+							<text class="text-price">未打印</text>
 						</view>
-						<view class="font-26 mr-3 d-flex flex-row" v-else>
-							已打印<text class="" style="color: #FD6801;">{{item.PrintCount}}</text>次
+						<view class="mr-3 d-flex flex-row" v-else>
+							已打印<text class="text-price">{{item.PrintCount}}</text>次
 						</view>
 					</view>
 				</view>
+				
+				<view class="d-flex flex-row a-center ml-1 j-end">
+					<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="checkPayStatus" v-if="item.Status == 2">查询支付</view>
+					<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="printOrder(item.PrintCount)" 
+					v-if="item.Status == 3 || item.Status == 1">打印订单</view>
+				</view>
 			</view>
-			
-			<view class="d-flex flex-row a-center ml-1 j-end">
-				<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="checkPayStatus" v-if="item.Status == 2">查询支付</view>
-				<!-- <view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="printOrder" v-if="item.Status == 2">查询支付</view> -->
-				<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="printOrder(item.PrintCount)" 
-				v-if="item.Status == 3 || item.Status == 1">打印订单</view>
-			</view>
-		</view>
-
-		<view class="position-absolute border text-center pl-1 pr-1 rounded-20 font-22" v-if="item.ViewStatus == 0"
-		style="right: 30rpx; background-color: red; color: #FFFFFF;">未查看</view>
 		
-		<send-command ref="sendCommand" @printComplete="printComplete"></send-command>
+			<!-- <view class="position-absolute border text-center pl-1 pr-1 rounded-20 font-22" v-if="item.ViewStatus == 0"
+			style="right: 30rpx; background-color: red; color: #FFFFFF;">未查看</view> -->
+			
+			<send-command ref="sendCommand" @printComplete="printComplete"></send-command>
+		</view>
 	</view>
 </template>
 

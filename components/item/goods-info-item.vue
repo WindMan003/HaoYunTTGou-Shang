@@ -1,52 +1,42 @@
 <template>
 	<view class="w-100 d-flex flex-row border-bottom p-1">
-		<view class="ml-1 d-flex a-center j-center" style="width: 220rpx; height: 220rpx;">
-			<image :src="item.MinTitleImgUrl" style="border-radius: 8rpx;" mode="widthFix"></image>
+		<view class="ml-1 d-flex flex-row mt-1" style="width: 30%;">
+			<image class="rounded-10" style="width: 220rpx; height: 220rpx;" :src="item.MinTitleImgUrl" mode="aspectFill"></image>
 		</view>
 		<view class="ml-1 d-flex flex-column" style="width: 70%;">
 			<view class="d-flex flex-row a-center ml-1">
-				<view class="d-flex flex-row" style="width: 40%;">
-					<view class="font-26 font-weight">类别:</view>
-					<view class="font-26">{{item.ProductTypeName}}</view>
-				</view>
-				<view class="d-flex flex-row" style="width: 30%;">
-					<block v-if="item.IsLimitBuy == 1">
-						<view class="font-26 font-weight">库存:</view>
-						<view class="font-26">{{item.Stock}}</view>
-					</block>
-				</view>
-				<view class="d-flex flex-row" style="width: 30%;">
-					<view class="font-26 font-weight">已卖出:</view>
-					<view class="font-26" style="color: red;">{{item.SellCount}}</view>
+				<view class="">名称：{{item.Name}}</view>
+			</view>
+			
+			<view class="d-flex flex-row a-center j-sb ml-1 mr-3">
+				<view class="">类别：{{item.ProductTypeName}}</view>
+				<view class="d-flex flex-row">
+					<view class="">已卖出：</view>
+					<view class="" style="color: red;">{{item.SellCount}}</view>
 				</view>
 			</view>
 			
-			<view class="d-flex flex-row a-center ml-1">
-				<view class="d-flex flex-row" style="width: 70%;">
-					<view class="font-26 font-weight">名称:</view>
-					<view class="font-26">{{item.Name}}</view>
-				</view>
-				<view class="d-flex flex-row" style="width: 30%;">
-					<view class="font-26 font-weight">排序值:</view>
-					<view class="font-26">{{item.SortValue}}</view>
-				</view>
+			<view class="d-flex flex-row a-center j-sb ml-1 mr-3">
+				<view class="">排序值：{{item.SortValue}}</view>
+				<view class="" v-if="item.IsLimitBuy == 0">库存：{{item.Stock}}</view>
 			</view>
+			
 			<view class="d-flex flex-row a-center ml-1">
-				<view class="font-26 font-weight">口味:</view>
-				<view class="font-26" v-if="!isTasteList">无</view>
+				<view class="">口味：</view>
+				<view class="" v-if="!isTasteList">无</view>
 				<view class="d-flex flex-row" v-for="(item1,index1) in item.TasteList" :key="index1">
-					<view class="font-26">{{item1.Name}}</view>
-					<view class="font-26" v-if="index1 != item.TasteList.length - 1">,</view>
+					<view class="">{{item1.Name}}</view>
+					<view class="" v-if="index1 != item.TasteList.length - 1">,</view>
 				</view>
 			</view>
 			
-			<view class="d-flex flex-row a-center" style="">
-				<view class="font-26 font-weight ml-1">价格:</view>
-				<view class="font-26" style="color: #FD6801;" v-if="!isSpecificationList">￥{{item.Price}}</view>
+			<view class="d-flex flex-row a-center ml-1">			
+				<view class="">价格：</view>
+				<view class="text-price" v-if="!isSpecificationList">￥{{item.Price}}</view>
 				<view class="d-flex flex-row" v-for="(item1,index1) in item.SpecificationList" :key="index1">
-					<view class="font-26">{{item1.Name}}</view>
-					<view class="font-26" style="color: #FD6801;">￥{{item1.Price}}</view>
-					<view class="font-26" v-if="index1 != item.SpecificationList.length - 1">,</view>
+					<view class="">{{item1.Name}}</view>
+					<view class="text-price">￥{{item1.Price}}</view>
+					<view class="" v-if="index1 != item.SpecificationList.length - 1">,</view>
 				</view>
 			</view>
 			

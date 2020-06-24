@@ -38,12 +38,12 @@
 			}
 		},
 		onLoad() {
-			var em_token = uni.getStorageSync('em_token')
-			console.log(em_token)
-			if(em_token != ''){
-				// 直接登录
-				this.loginByToken(em_token)
-			}
+			// var em_token = uni.getStorageSync('em_token')
+			// console.log(em_token)
+			// if(em_token != ''){
+			// 	// 直接登录
+			// 	this.loginByToken(em_token)
+			// }
 		},
 		computed:{
 			...mapState({

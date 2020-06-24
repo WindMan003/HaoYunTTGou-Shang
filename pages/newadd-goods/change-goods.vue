@@ -85,8 +85,8 @@
 			<view class="d-flex flex-column j-center mt-2">
 				<view class="font-30 font-weight">是否限购</view>
 				<radio-group @change="checkboxIsLimitBuy">
-					<label><radio value="shi" style="transform:scale(0.8)"/>是</label>
-					<label><radio value="fou" checked="true" style="transform:scale(0.8)"/>否</label>
+					<label><radio value="shi" :checked="isShowStock" style="transform:scale(0.8)"/>是</label>
+					<label><radio value="fou" :checked="!isShowStock" style="transform:scale(0.8)"/>否</label>
 				</radio-group>
 			</view>
 			
@@ -102,8 +102,8 @@
 			<view class="d-flex flex-column j-center mt-2">
 				<view class="font-30 font-weight">是否展示</view>
 				<radio-group @change="checkboxEnabled">
-					<label><radio value="shi" checked="true" style="transform:scale(0.8)"/>是</label>
-					<label><radio value="fou" style="transform:scale(0.8)"/>否</label>
+					<label><radio value="shi" :checked="isShow" style="transform:scale(0.8)"/>是</label>
+					<label><radio value="fou" :checked="!isShow" style="transform:scale(0.8)"/>否</label>
 				</radio-group>
 			</view>
 			
@@ -153,8 +153,8 @@
 				priceText:null,
 				nameText:null,
 				typeText:null,
-				Enabled:1,
-				IsLimitBuy:0,
+				Enabled: 1,
+				IsLimitBuy: 0,
 				Stock:0,
 				//默认名称
 				ID:null,
@@ -188,6 +188,13 @@
 				if(this.IsLimitBuy == 1){
 					return true
 				}else if(this.IsLimitBuy == 0){
+					return false
+				}
+			},
+			isShow(){
+				if(this.Enabled == 1){
+					return true
+				}else if(this.Enabled == 0){
 					return false
 				}
 			},

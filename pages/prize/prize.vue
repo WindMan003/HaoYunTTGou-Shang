@@ -47,8 +47,13 @@
 		},
 		methods: {
 			prizeInfo(){
+				// uni.navigateTo({
+				// 	url:"./prize-info"
+				// })
+				let backurl = '../prize/prize'
+				let value = 'action=/Activity/index'
 				uni.navigateTo({
-					url:"./prize-info"
+					url: '../webview/webview?'+value+'&backurl='+backurl,
 				})
 			}
 		}

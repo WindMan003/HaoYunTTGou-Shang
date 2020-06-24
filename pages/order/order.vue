@@ -5,17 +5,22 @@
 			style="right: 15rpx;" @click="employeeLoginOut">退出登录</view>
 		</view> -->
 		
-		<view class="border-bottom w-100 d-flex flex-column a-center"  style="height:240rpx;">
-			<view class="w-100 d-flex flex-row a-center ml-2" style="height: 80rpx;">
-				<view class="border font-30"  style="width: 200rpx; height: 50rpx;">
-					<input class="ml-2" type="number" :value="orderNumber" placeholder="订单号" maxlength="20" @input="orderNum"/>
-				</view>
-				
-				<input class="ml-1 border font-30" style="width: 200rpx; height: 50rpx;" type="text" :value="tableNumber"
-				placeholder="桌子号" maxlength="5" @input="tableNum"/>
-			</view>
+		<!-- <view class="w-100 d-flex flex-column a-center"  style="height: 80rpx;"> -->
+		<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
+			<input class="border font-30 ml-2" type="number" style="width: 200rpx; height: 50rpx;"
+			placeholder="订单号" maxlength="20" @input="orderNumInput"/>
 			
-			<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
+			<input class="ml-1 border font-30" style="width: 100rpx; height: 50rpx;" type="text"
+			placeholder="桌子号" maxlength="10" @input="tableNumInput"/>
+			
+			<view class="d-flex flex-row a-center j-end" style="width: 55%;">
+				<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空</view>
+				<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询</view>
+				<view class="mr-3 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refreshOrder">刷新</view>
+			</view>
+		</view>
+			
+<!-- 			<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
 				<view class="d-flex flex-row a-center" style="width: 70%;">
 					<time-selector showType="date" @btnConfirm="btnConfirmBegin">
 						<view class="border font-26 ml-2" style="color: #999999; height: 50rpx; width: 180rpx;">{{beginDate}}</view>
@@ -27,14 +32,11 @@
 						<view class="border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{endDate}}</view>
 					</time-selector>
 				</view>
-
-				<view class="d-flex flex-row a-center j-end" style="width: 30%;">
-					<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空</view>
-					<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询</view>
-				</view>
-			</view>
+			</view> -->
 			
-			<view class="w-100 d-flex flex-row j-end a-center ml-2 flex-wrap" style="height: 80rpx;">
+
+			
+<!-- 			<view class="w-100 d-flex flex-row j-end a-center ml-2 flex-wrap" style="height: 80rpx;">
 				<block v-for="(item, index) in defaultStatus" :key="index">
 					<view class="mr-2 mt-1 mb pl-1 pr-1 font-26 border rounded position-relative"
 					:style="item.Value == statusID ? 'color: #FD6801; border-color: #FD6801;':''"
@@ -44,14 +46,26 @@
 						style="width: 15rpx; height: 15rpx; background-color: red; right: 2rpx; top: 2rpx;"></view>
 					</view>
 				</block>
-				<view class="mr-2 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="refreshOrder">刷新</view>
-			</view>
+			</view> -->
+		<!-- </view> -->
+		
+		<view class="w-100 d-flex flex-row j-sa a-center border-bottom" style="height: 80rpx;">
+			<block v-for="(item, index) in defaultStatus" :key="index">
+				<view class="pl-1 pr-1 font-26 position-relative"
+				:class="item.Value == statusID ? 'border-bottom':''"
+				:style="item.Value == statusID ? 'border-color: #FD6801':''"
+				@click="switchStatus(item.Value)">
+					{{item.Text}}
+				</view>
+			</block>
 		</view>
-
+		
 		<page-content widthTab refresher infiniting @onrefresh="refresh" @oninfinite="infiniteScroll" class="page-content" 
-		:scrollheight="totalH">
+		:scrollheight="totalH" style="background-color: #EEEEEE;">
 			<view class="" v-for="(item,index) in orderList" :key="index">
-				<order-item :item="item" :statusList="defaultStatus"></order-item>
+				<view class="mt-2">
+					<order-item :item="item" :statusList="defaultStatus"></order-item>
+				</view>
 			</view>
 		</page-content>
 	</view>
@@ -87,12 +101,12 @@
 		onLoad() {
 			uni.getSystemInfo({
 				success: (res) => {
-					this.totalH = res.windowHeight - uni.upx2px(240)
+					this.totalH = res.windowHeight - uni.upx2px(160)
 				}
 			})
-			this.getTimeScope()
 		},
 		onShow() {
+			this.getTimeScope()
 		},
 		computed:{
 			...mapState({
@@ -169,10 +183,10 @@
 			btnConfirmEnd(e){
 				this.endDate = e.key
 			},
-			orderNum(e){
+			orderNumInput(e){
 				this.orderNumber = e.detail.value
 			},
-			tableNum(e){
+			tableNumInput(e){
 				this.tableNumber = e.detail.value
 			},
 			loadMore(callback){
@@ -198,7 +212,8 @@
 			},
 			switchStatus(index){
 				if(this.statusID == index){
-					this.statusID = 99
+					// this.statusID = 99
+					return
 				}else{
 					this.statusID = index
 				}

@@ -22,6 +22,11 @@
 					<view class="font-26 border pl-1 pr-1 ml-3 btn-blue-white" @click="setStatusSubmit">设置已上</view>
 				</view>
 				
+				<view class="w-100 d-flex flex-row a-center ml-1 mt-1" v-if="getConfirmShow">
+					<view class="font-26 border pl-1 pr-1 btn-orange-white position-absolute"
+					style="right: 20upx;" @click="confirmOrder">确认加菜</view>
+				</view>
+				
 				<view class="w-100 d-flex flex-column ml-1 mt-1">
 					<checkbox-group @change="checkboxChange">
 						<block v-for="(item1, index1) in ProductList" :key="index1">
@@ -116,7 +121,8 @@
 				statusList:[],
 				select:false,
 				Status: -99,
-				printCount: 0
+				printCount: 0,
+				isTouch: true
 			}
 		},
 		onLoad: function (option) {
@@ -175,21 +181,6 @@
 					console.log(res)
 					if(res.status == 0){
 						// 设置为已读
-						_self.initPrintCount()
-					}else{
-						_self.$Common.showToast(res)
-					}
-				})
-			},
-			initPrintCount(){
-				var _self = this
-				let postData = { OrderID:_self.OrderItem.ID }
-				_self.$H.post('/api/order/PrintCount', postData, {
-					token: true
-				}).then(res=>{
-					console.log(res)
-					if(res.status == 0){
-						_self.printCount = res.data
 					}else{
 						_self.$Common.showToast(res)
 					}
@@ -208,7 +199,8 @@
 						_self.OrderItem = res.data.OrderItem
 						_self.tableNumberText = res.data.OrderItem.TableNumber
 						_self.tidyProductList(res.data.ProductList)
-						_self.initOrderView(m_id)
+						// _self.initOrderView(m_id)
+						_self.printCount = res.data.OrderItem.PrintCount
 					}else{
 						_self.jumpShowToast(res.message)
 					}
@@ -428,7 +420,11 @@
 				// }else{
 				// 	_self.gotoPrintOrder(m_around)
 				// }
-				this.gotoPrintOrder(Number(m_around))
+				if(this.isTouch){
+					this.gotoPrintOrder(Number(m_around))
+				}else{
+					uni.showToast({title: '正在打印中,请稍等...', icon: 'none', duration: 1000})
+				}
 			},
 			gotoPrintOrder(m_around){
 				var _self = this
@@ -454,6 +450,7 @@
 			},
 			printOrderSure(m_around){
 				var _self = this;
+				_self.isTouch = false
 				_self.$H.post('/API/Order/PrintOrder',{
 					OrderID: _self.OrderItem.ID,
 					AddRound: m_around
@@ -461,8 +458,10 @@
 					token:true
 				}).then(res=>{
 					console.log(res)
+					_self.isTouch = true
 					if(res.status == 0){
-						_self.printComplete()
+						uni.showToast({title: '打印成功', icon: 'none', duration: 1000})
+						_self.printCount = _self.printCount + 1
 					}else{
 						_self.$Common.showToast(res)
 					}

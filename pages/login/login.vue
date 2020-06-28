@@ -96,13 +96,13 @@
 				// password:'',
 				account:'qazwsxedc',
 				password:'123123',
-				phone:'',
-				phoneCode:'',
-				loginType:1,
-				codeBut:'发送验证码',
-				codeClick:true,
-				infoList:'',
-				accountInfo:''
+				phone: '',
+				phoneCode: '',
+				loginType: 1,
+				codeBut: '发送验证码',
+				codeClick: true,
+				infoList: '',
+				accountInfo: ''
 			}
 		},
 		onLoad() {

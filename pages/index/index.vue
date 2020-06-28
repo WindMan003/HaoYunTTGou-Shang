@@ -42,12 +42,7 @@
 				categoryList: [
 					{name:'类别'},
 					{name:'产品'}
-				],
-				webviewStyles: {
-					progress: {
-						color: '#FF3333'
-					}
-				}
+				]
 			}
 		},
 		onLoad() {

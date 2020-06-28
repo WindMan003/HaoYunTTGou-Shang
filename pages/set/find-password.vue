@@ -16,7 +16,7 @@
 				</view>
 			</view>
 			
-			<view class="border mt-2 font-30" style="width: 500rpx;" v-if="isShowAccountInfo">
+			<view class="border mt-2 font-30" style="width: 500rpx;" v-if="isShowAccountInfo && infoList.length > 1">
 				<view class="ml-2">
 					<uni-combox placeholder="选择需要修改密码的店铺" :value="getAccountName" :candidates="getAccountNameList" 
 					@input="accountNameInput"></uni-combox>
@@ -72,11 +72,12 @@
 			}),
 			isShowAccountInfo(){
 				var length = this.infoList.length
-				if(length > 1){
-					return true
-				}else{
-					return false
-				}
+				return true  //显示账号
+				// if(length > 1){
+				// 	return true
+				// }else{
+				// 	return false
+				// }
 			},
 			getAccountName(){
 				return this.accountInfo.Name

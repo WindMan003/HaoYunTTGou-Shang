@@ -65,7 +65,8 @@
 		methods: {
 			getLink(){
 				let date = new Date().getTime();
-				this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)+'&t='+date
+				// this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)+'&t='+date
+				this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)
 				console.log(this.link)
 			},
 			prizeInfo(){

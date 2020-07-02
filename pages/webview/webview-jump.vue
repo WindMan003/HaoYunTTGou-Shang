@@ -56,6 +56,17 @@
 					if(m_webview){
 						m_webview.evalJS(data.data)
 					}
+				}else if(data.action == 'back'){
+					let m_webview = this.getWebview(data.wvid)
+					if(m_webview){
+						m_webview.close()
+					}
+
+					setTimeout(function() {
+						uni.navigateBack({
+							delta: Number(data.data)
+						})
+					}, 300);
 				}
 				// #endif
 			},

@@ -23,12 +23,13 @@
 		
 	</view> -->
 	<view>
-		<web-view :webview-styles="webviewStyles" :src="link"></web-view>
+		<web-view :webview-styles="webviewStyles" :src="link" @message="handleMessage"></web-view>
 	</view>
 </template>
 	
 <script>
 	import {mapState,mapGetters,mapActions,mapMutations} from "vuex"
+	
 	export default {
 		components:{
 
@@ -51,33 +52,67 @@
 				}
 			})
 			
+			// #ifdef APP-PLUS
+			var _self = this
+			var currentWebview = this.$scope.$getAppWebview()
+			//此对象相当于html5plus里的plus.webview.currentWebview()。
+			//在uni-app里vue页面直接使用plus.webview.currentWebview()无效，非v3编译模式使用this.$mp.page.$getAppWebview()
+			setTimeout(function() {
+				let wv = currentWebview.children()[0]
+				let data = {}
+				data.wvid = 'ActivityIndex'
+				data.webview = wv
+				_self.initWebview(data)
+			}, 1000); //如果是页面初始化调用时，需要延时一下
+			// #endif
 		},
 		onShow() {
 			this.getLink()
 		},
+		
 		computed:{
 			...mapState({
 				merchantSite:state=>state.user.merchantSite,
-				token:state=>state.user.token
+				token:state=>state.user.token,
+				webview:state=>state.user.webview
 			}),
-			
 		},
 		methods: {
+			...mapMutations([
+				'initWebview'
+			]),
 			getLink(){
-				let date = new Date().getTime();
+				// let date = new Date().getTime();
 				// this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)+'&t='+date
 				this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)
+				// this.link = 'https://update.tuanmi028.com/test111.html'
 				console.log(this.link)
 			},
 			prizeInfo(){
-				// uni.navigateTo({
-				// 	url:"./prize-info"
-				// })
-				let backurl = '../prize/prize'
 				let value = 'action=/Activity/index'
 				uni.navigateTo({
-					url: '../webview/webview?'+value+'&backurl='+backurl,
+					url: '../webview/webview?'+value
 				})
+			},
+			handleMessage(evt) {
+				console.log('接收到的消息：' + JSON.stringify(evt.detail)); 
+				// #ifdef APP-PLUS
+				let data = evt.detail.data[0]
+				if(data.action == 'js'){
+					let m_webview = this.getWebview(data.wvid)
+					if(m_webview){
+						m_webview.evalJS(data.data)
+					}
+				}
+				// #endif
+			},
+			getWebview(wvid){
+				for (let i = 0; i < this.webview.length; i++) {
+					if(this.webview[i].wvid == wvid){
+						return this.webview[i].webview
+					}
+				}
+				return null
 			}
 		}
 	}

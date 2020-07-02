@@ -13,7 +13,9 @@ export default {
 		merchantAmount:0.00,
 		signkey:'14daa8b8e2158349222dfe84a377733f',
 		merchantInfo: '',
-		isIOSshenhe: false
+		isIOSshenhe: false,
+		
+		webview: []
 	},
 	mutations:{
 		// 初始化数据
@@ -78,6 +80,15 @@ export default {
 		},
 		initIOSshenhe(state, isIOSshenhe){
 			state.isIOSshenhe = isIOSshenhe
+		},
+		initWebview(state, webview){
+			for (let i = 0; i < state.webview.length; i++) {
+				if(webview.wvid == state.webview[i].wvid){
+					state.webview[i] = webview
+					return
+				}
+			}
+			state.webview.push(webview)
 		},
 	},
 	actions:{

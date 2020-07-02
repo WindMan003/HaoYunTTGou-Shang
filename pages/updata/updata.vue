@@ -67,7 +67,7 @@
 					this.nextTo()
 					return
 				}
-				
+				// this.nextTo()
 				if(Number(versions[0]) > Number(currentVersions[0])){
 					// 有大版本更新
 					this.versionUpdate(versionUrl)

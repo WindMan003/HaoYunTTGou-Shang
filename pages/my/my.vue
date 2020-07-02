@@ -121,9 +121,8 @@
 			navigate(path, m_bool, value){
 				if (!path) return;
 				if(m_bool){
-					let backurl = '../my/my'
 					return uni.navigateTo({
-						url: `/pages/${path}/${path}?`+value+'&backurl='+backurl,
+						url: `/pages/${path}/${path}?`+value
 					});
 				}
 				uni.navigateTo({

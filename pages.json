@@ -194,6 +194,11 @@
 				
 			}
         },{
+            "path" : "pages/webview/webview-jump",
+            "style" : {
+				
+			}
+        },{
             "path" : "pages/prize/prize",
             "style" : {
 				"navigationBarTitleText": "抽奖活动"

@@ -89,11 +89,16 @@
 			...mapActions([
 			]),
 			showPopup(item){
+				console.log(item)
 				//初始化数据
 				this.item = item
 				this.password = '******'
 				this.nickname = item.Name
-				this.isEnable = true
+				if(item.Enabled == 1){
+					this.isEnable = true
+				}else{
+					this.isEnable = false
+				}
 				this.$refs.popup.open()
 			},
 			change(e){
@@ -141,7 +146,18 @@
 								break
 							}
 						}
-						_self.$refs.popup.onTap()
+						uni.showModal({
+						    title: '提示',
+						    content: '修改成功',
+							showCancel: false,
+						    success: function (res) {
+						        if (res.confirm) {
+						            _self.$refs.popup.onTap()
+						        } else if (res.cancel) {
+						            console.log('用户点击取消');
+						        }
+						    }
+						})
 					}else{
 						uni.showToast({title:res.message, icon:'none', duration:1000})
 					}

@@ -175,9 +175,15 @@
 				this.mescroll.optUp.textNoMore = '没有更多了'
 			},
 			/*下拉刷新的回调*/
-			downCallback(){
-				// 与 mescroll-body 的处理方式一致 > 
-				this.mescroll.resetUpScroll(); // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
+			downCallback(m_mescroll){
+				if(m_mescroll){
+					// 不设置延迟刷新太快，看不出效果
+					setTimeout(()=>{
+						this.mescroll.resetUpScroll();
+					}, 500)
+				}else{
+					this.mescroll.resetUpScroll(); // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
+				}
 			},
 			/*上拉加载的回调*/
 			upCallback(page) {

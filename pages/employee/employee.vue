@@ -12,8 +12,9 @@
 		</view>
 		
 		<view class="d-flex flex-row a-center border-bottom font-30" style="height: 80rpx;">
-			<view class="text-center" style="width: 30%;">账号</view>
-			<view class="text-center" style="width: 30%;">昵称</view>
+			<view class="ml-2 text-center" style="width: 20%;">账号</view>
+			<view class="text-center" style="width: 20%;">昵称</view>
+			<view class="text-center" style="width: 20%;">是否启用</view>
 			<view class="text-center" style="width: 40%;">操作</view>
 		</view>
 		
@@ -21,8 +22,9 @@
 			<view class="d-flex flex-column">
 				<block v-for="(item,index) in employeeList" :key="index">
 					<view class="d-flex flex-row a-center mt-1">
-						<view class="ml-2 text-center" style="width: 30%;">{{item.Account}}</view>
-						<view class="text-center" style="width: 30%;">{{item.Name}}</view>
+						<view class="ml-2 text-center" style="width: 20%;">{{item.Account}}</view>
+						<view class="text-center" style="width: 20%;">{{item.Name}}</view>
+						<view class="text-center" style="width: 20%;">{{getEnableText(item.Enabled)}}</view>
 						<view class="d-flex flex-row a-center j-center" style="width: 40%;">
 							<view class="border font-26 pl-2 pr-2 btn-blue-white" @click="change(index)">修改</view>
 							<view class="border font-26 ml-1 pl-2 pr-2 btn-blue-white" @click="deleteItem(index)">删除</view>
@@ -89,6 +91,13 @@
 						uni.showToast({title:res.message, icon:'none', duration:1000})
 					}
 				})
+			},
+			getEnableText(m_num){
+				if(m_num == 1){
+					return '启用'
+				}else{
+					return '未启用'
+				}
 			},
 			nickNameInput(e){
 				this.nickName = e.target.value

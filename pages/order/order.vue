@@ -175,8 +175,7 @@
 				this.mescroll.optUp.textNoMore = '没有更多了'
 			},
 			/*下拉刷新的回调*/
-			downCallback(){
-				// 与 mescroll-body 的处理方式一致 > 
+			downCallback(m_mescroll){
 				this.mescroll.resetUpScroll(); // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
 			},
 			/*上拉加载的回调*/
@@ -189,18 +188,20 @@
 					token:true
 				}).then(res=>{
 					console.log(res)
-					_self.uploadList = {}
-					if(res.status == 0){
-						if(page.num == 1) _self.updateOrderList([]); //如果是第一页需手动置空列表
-						let curPageData = res.data; 
-						let curPageLen = curPageData.length; 
-						_self.pushUpdateOrderList(curPageData)
-						_self.mescroll.endSuccess(curPageLen, curPageLen < pageSize ? 'false':'true');
-						_self.showMeToast()
-					}else{	
-						uni.showToast({title:res.message, icon:'none', duration:1500})
-						_self.mescroll.endErr()
-					}
+					setTimeout(()=>{
+						_self.uploadList = {}
+						if(res.status == 0){
+							if(page.num == 1) _self.updateOrderList([]); //如果是第一页需手动置空列表
+							let curPageData = res.data; 
+							let curPageLen = curPageData.length; 
+							_self.pushUpdateOrderList(curPageData)
+							_self.mescroll.endSuccess(curPageLen, curPageLen < pageSize ? 'false':'true');
+							_self.showMeToast()
+						}else{	
+							uni.showToast({title:res.message, icon:'none', duration:1500})
+							_self.mescroll.endErr()
+						}
+					}, 500)
 				})
 			},
 			initUpdateList(m_pageNum, m_pageSize){

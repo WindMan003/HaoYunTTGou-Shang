@@ -52,6 +52,9 @@
 				}
 			})
 			
+			this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)
+			console.log(this.link)
+			
 			// #ifdef APP-PLUS
 			var _self = this
 			var currentWebview = this.$scope.$getAppWebview()
@@ -65,9 +68,6 @@
 				_self.initWebview(data)
 			}, 1000); //如果是页面初始化调用时，需要延时一下
 			// #endif
-		},
-		onShow() {
-			this.getLink()
 		},
 		
 		computed:{
@@ -96,7 +96,6 @@
 			},
 			handleMessage(evt) {
 				console.log('接收到的消息：' + JSON.stringify(evt.detail)); 
-				// #ifdef APP-PLUS
 				let data = evt.detail.data[0]
 				if(data.action == 'js'){
 					let m_webview = this.getWebview(data.wvid)
@@ -104,7 +103,6 @@
 						m_webview.evalJS(data.data)
 					}
 				}
-				// #endif
 			},
 			getWebview(wvid){
 				for (let i = 0; i < this.webview.length; i++) {

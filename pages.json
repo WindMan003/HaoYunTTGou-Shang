@@ -44,7 +44,12 @@
         },{
             "path" : "pages/order/order",
             "style" : {
-				"navigationBarTitleText": "用户订单"
+				"navigationBarTitleText": "用户订单",
+				"disableScroll": true, // 禁止原生页面滚动, 解决Android小程序下拉卡顿的问题
+				"app-plus" : {
+					"bounce" : "none" // 取消APP端iOS回弹,避免与下拉刷新冲突 (可统一配在 'globalStyle')
+				},
+				"mp-alipay":{"allowsBounceVertical":"NO"} // 取消支付宝和钉钉小程序的iOS回弹,避免与下拉刷新冲突 (可统一配在 'globalStyle')
 			}
         },{
 		    "path" : "pages/order/order-employee",
@@ -246,7 +251,8 @@
 		"navigationBarTextStyle": "black",
 		"navigationBarTitleText": "",
 		"navigationBarBackgroundColor": "#FFFFFF",
-		"backgroundColor": "#FFFFFF"
+		"backgroundColor": "#FFFFFF",
+		"backgroundColorTop":"#FFFFFF" // iOS APP真机bounce回弹区域默认灰色,建议统一重置为白色
 	},
 	"tabBar" : {
 		"color" : "#B5B5B5",

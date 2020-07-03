@@ -60,13 +60,12 @@
 					let m_webview = this.getWebview(data.wvid)
 					if(m_webview){
 						m_webview.close()
+						m_webview.onclose = function(){
+							uni.navigateBack({
+								delta: Number(data.data)
+							})	
+						}
 					}
-
-					setTimeout(function() {
-						uni.navigateBack({
-							delta: Number(data.data)
-						})
-					}, 300);
 				}
 				// #endif
 			},

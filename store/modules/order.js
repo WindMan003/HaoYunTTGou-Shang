@@ -18,6 +18,7 @@ export default {
 			}
 		}
 	},
+	
 	actions:{
 		updateOrderListFunc(context){
 			return new Promise((res,rej)=>{

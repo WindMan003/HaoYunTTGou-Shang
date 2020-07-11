@@ -27,8 +27,8 @@
 		</block>
 		<view class="" style="height: 200rpx;"></view>
 		<view class="d-flex flex-row a-center j-center" style="color: #007AFF;">
-			<view class="" @click="billList">账单</view>
-			<view class="ml-1 mr-1 text-muted">|</view>
+<!-- 			<view class="" @click="billList">账单</view>
+			<view class="ml-1 mr-1 text-muted">|</view> -->
 			<view class="" @click="takeList">提现明细</view>
 			<view class="ml-1 mr-1 text-muted">|</view>
 			<view class="" @click="modifyTakePassword">修改提现密码</view>

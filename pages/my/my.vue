@@ -26,6 +26,7 @@
 					<uni-list-item title="账户信息" :rightText="merchantAmount+' 元'" :showRightText="true"
 					@click="navigate('take', false)"></uni-list-item>
 				</block>
+				<uni-list-item title="我的账单" @click="navigate('bill', false)"></uni-list-item>
 				<!-- <uni-list-item title="提现账户" :rightText="getTakeAccountCount" showRightText="true" @click="takeAccount"></uni-list-item> -->
 				<!-- <uni-list-item title="店铺信息" @click="navigate('merchant', false)"></uni-list-item> -->
 				<uni-list-item title="问题反馈" @click="navigate('question', false)"></uni-list-item>

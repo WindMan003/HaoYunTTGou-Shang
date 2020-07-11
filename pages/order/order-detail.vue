@@ -94,7 +94,30 @@
 						</block>
 					</view>
 				</view>
-			
+				
+				<view class="mt-5 d-flex flex-column ml-2" v-if="OrderItem.Status == 2 || OrderItem.Status == 3">
+					<view class="font-32 font-weight">订单付款详情</view>
+					<view class="d-flex flex-row a-center">
+						<view class="">使用代金券：</view>
+						<view class="text-price">￥{{OrderItem.UseVoucherAmount}}</view>
+					</view>
+					<view class="d-flex flex-row a-center">
+						<view class="">使用幸运币：</view>
+						<view class="text-price">￥{{OrderItem.UseLuckyCoin}}</view>
+					</view>
+					<view class="d-flex flex-row a-center">
+						<view class="">使用代金币：</view>
+						<view class="text-price">￥{{OrderItem.UseBuyCoin}}</view>
+					</view>
+					<view class="d-flex flex-row a-center">
+						<view class="">实付款：</view>
+						<view class="text-price">￥{{OrderItem.PayAmount}}</view>
+					</view>
+					<view class="d-flex flex-row a-center">
+						<view class="font-32 font-weight">合计：</view>
+						<view class="text-price font-32 font-weight">￥{{OrderItem.Amount}}</view>
+					</view>
+				</view>
 				<view class="w-100 d-flex flex-row ml-1 mt-3" style="height: 60rpx;"></view>
 			</view>
 		</scroll-view>

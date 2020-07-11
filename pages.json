@@ -227,12 +227,14 @@
         },{
             "path" : "pages/bill/bill",
             "style" : {
-				"navigationBarTitleText": "账单明细",
+				"navigationBarTitleText": "账单",
 				"enablePullDownRefresh": true
 			}
         },{
             "path" : "pages/bill/bill-info",
-            "style" : {}
+            "style" : {
+				"navigationBarTitleText": "账单明细"
+			}
         }
         ,{
             "path" : "pages/binddevice/binddevice",

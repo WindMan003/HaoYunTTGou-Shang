@@ -58,7 +58,7 @@
 				</view>
 			</block>
 		</view>
-
+		
 		<mescroll-uni ref="mescrollRef" @init="mescrollInit" @down="downCallback" @up="upCallback" :height="totalH+'px'"
 		style="background-color: #EEEEEE;">
 			<view class="" v-for="(item,index) in orderList" :key="index">
@@ -74,13 +74,15 @@
 	import orderItem from "@/components/order/order-item.vue"
 	import timeSelector from "@/components/time-selector/time-selector.vue"
 	import MescrollMixin from "@/components/mescroll-uni/mescroll-mixins.js";
+	import refresh from '@/components/common/refresh.vue';
 	
 	import {mapState, mapGetters, mapActions, mapMutations} from "vuex"
 	export default {
 		mixins: [MescrollMixin], // 使用mixin
 		components:{
 			orderItem,
-			timeSelector
+			timeSelector,
+			refresh
 		},
 		data() {
 			return {

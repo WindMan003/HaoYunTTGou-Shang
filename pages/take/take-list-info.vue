@@ -37,10 +37,6 @@
 					<view class="font-26 text-muted" style="width: 24%;">提现状态</view>
 					<view class="font-26">{{statusText}}</view>
 				</view>
-				<view class="d-flex flex-row a-center mt-2">
-					<view class="font-26 text-muted" style="width: 24%;">提现状态</view>
-					<view class="font-26">{{statusText}}</view>
-				</view>
 				<view class="" style="height: 50rpx;"></view>
 			</view>
 		</view>
@@ -81,16 +77,6 @@
 					return '支付宝'
 				}
 			},
-			getTakeStatus(statusID){
-				var temp = this.typeList.Status
-				for (var i = 0; i < temp.length; i++) {
-					if(statusID == temp[i].Value){
-						return temp[i].Text
-					}
-				}
-			},
-			
-			
 		}
 	}
 </script>

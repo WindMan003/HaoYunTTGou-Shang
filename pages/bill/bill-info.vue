@@ -120,7 +120,7 @@
 			getConsumptionAmount(){
 				let item = this.item
 				let temp = item.Amount - item.PayHandlingFee - item.UseBuyCoinHandlingFee - item.UseLuckyCoinHandlingFee
-				return temp
+				return temp.toFixed(4)
 			}
 		},
 		methods: {

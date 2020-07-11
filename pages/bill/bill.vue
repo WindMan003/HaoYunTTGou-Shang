@@ -27,7 +27,7 @@
 					</view>
 					<view class="d-flex flex-row a-center mt-1 position-relative">
 						<view class="font-24 text-muted">{{item.CreateTime}}</view>
-						<view class="font-24 text-muted position-absolute" style="right: 30rpx;">余额：{{item.CurrentAmount}}</view>
+						<view class="font-24 text-muted position-absolute" style="right: 30rpx;">余额：{{item.CurrentAmount.toFixed(4)}}</view>
 					</view>
 				</view>
 			</block>
@@ -185,8 +185,8 @@
 				})
 			},
 			getShowAmount(m_amount){
-				if(m_amount > 0){
-					return '+' + m_amount
+				if(Number(m_amount) > 0){
+					return '+' + Number(m_amount).toFixed(4)
 				}else{
 					return m_amount
 				}

@@ -19,19 +19,19 @@
 			</view>
 		</view>
 			
-<!-- 			<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
-				<view class="d-flex flex-row a-center" style="width: 70%;">
-					<time-selector showType="date" @btnConfirm="btnConfirmBegin">
-						<view class="border font-26 ml-2" style="color: #999999; height: 50rpx; width: 180rpx;">{{beginDate}}</view>
-					</time-selector>
-					
-					<view class="font-26 text-center" style="width: 30rpx; height: 40rpx;">-</view>
-					
-					<time-selector showType="date" @btnConfirm="btnConfirmEnd">
-						<view class="border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{endDate}}</view>
-					</time-selector>
-				</view>
-			</view> -->
+		<view class="w-100 d-flex flex-row a-center" style="height: 80rpx;">
+			<view class="d-flex flex-row a-center" style="width: 70%;">
+				<time-selector showType="date" @btnConfirm="btnConfirmBegin">
+					<view class="border font-26 ml-2" style="color: #999999; height: 50rpx; width: 180rpx;">{{beginDate}}</view>
+				</time-selector>
+				
+				<view class="font-26 text-center" style="width: 30rpx; height: 40rpx;">-</view>
+				
+				<time-selector showType="date" @btnConfirm="btnConfirmEnd">
+					<view class="border font-26" style="color: #999999; height: 50rpx; width: 180rpx;">{{endDate}}</view>
+				</time-selector>
+			</view>
+		</view>
 			
 
 			
@@ -66,6 +66,7 @@
 					<order-item :item="item" :statusList="defaultStatus"></order-item>
 				</view>
 			</view>
+			<view class="" style="height: 20rpx;"></view>
 		</mescroll-uni>
 	</view>
 </template>
@@ -103,13 +104,14 @@
 			uni.getSystemInfo({
 				success: (res) => {
 					console.log(res)
-					this.totalH = res.windowHeight - uni.upx2px(160)
+					this.totalH = res.windowHeight - uni.upx2px(240)
 					if(res.platform == 'android'){
 						this.totalH = this.totalH - 50
 					}
 				}
 			})
-			this.getOrderStatus()
+			// this.getOrderStatus()
+			this.getTimeScope()
 		},
 		onShow() {
 			// this.getTimeScope()
@@ -196,9 +198,11 @@
 							if(page.num == 1) _self.updateOrderList([]); //如果是第一页需手动置空列表
 							let curPageData = res.data; 
 							let curPageLen = curPageData.length; 
-							_self.pushUpdateOrderList(curPageData)
-							_self.mescroll.endSuccess(curPageLen, curPageLen < pageSize ? 'false':'true');
 							_self.showMeToast()
+							setTimeout(()=>{
+								_self.pushUpdateOrderList(curPageData)
+								_self.mescroll.endSuccess(curPageLen, curPageLen < pageSize ? 'false':'true');
+							}, 50)
 						}else{	
 							uni.showToast({title:res.message, icon:'none', duration:1500})
 							_self.mescroll.endErr()

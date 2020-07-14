@@ -8,9 +8,7 @@ export default {
 	},
 	mutations:{
 		updateOrderList(state, value){
-			if(value){
-				state.orderList = value
-			}
+			state.orderList = value
 		},
 		pushUpdateOrderList(state, value){
 			for (var i = 0; i < value.length; i++) {

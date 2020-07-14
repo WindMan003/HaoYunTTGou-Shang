@@ -63,11 +63,11 @@
 					<view class="font-26 text-price">{{item.UseBuyCoinHandlingFee}}</view>
 				</view>
 				<view class="d-flex flex-row a-center mt-2">
-					<view class="font-26 text-muted" style="width: 24%;">使用幸运币</view>
+					<view class="font-26 text-muted" style="width: 24%;">使用账户余额</view>
 					<view class="font-26">{{item.UseLuckyCoin}}</view>
 				</view>
 				<view class="d-flex flex-row a-center mt-2">
-					<view class="font-26 text-muted" style="width: 24%;">幸运币佣金</view>
+					<view class="font-26 text-muted" style="width: 24%;">账户余额佣金</view>
 					<view class="font-26 text-price">{{item.UseLuckyCoinHandlingFee}}</view>
 				</view>
 				<view class="d-flex flex-row a-center mt-2">

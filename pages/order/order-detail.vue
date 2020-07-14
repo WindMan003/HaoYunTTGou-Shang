@@ -102,12 +102,12 @@
 						<view class="text-price">￥{{OrderItem.UseVoucherAmount}}</view>
 					</view>
 					<view class="d-flex flex-row a-center">
-						<view class="">使用幸运币：</view>
-						<view class="text-price">￥{{OrderItem.UseLuckyCoin}}</view>
-					</view>
-					<view class="d-flex flex-row a-center">
 						<view class="">使用代金币：</view>
 						<view class="text-price">￥{{OrderItem.UseBuyCoin}}</view>
+					</view>
+					<view class="d-flex flex-row a-center">
+						<view class="">使用账户余额：</view>
+						<view class="text-price">￥{{OrderItem.UseLuckyCoin}}</view>
 					</view>
 					<view class="d-flex flex-row a-center">
 						<view class="">实付款：</view>

@@ -66,7 +66,6 @@
 					<order-item :item="item" :statusList="defaultStatus"></order-item>
 				</view>
 			</view>
-			<view class="" style="height: 20rpx;"></view>
 		</mescroll-uni>
 	</view>
 </template>
@@ -179,7 +178,7 @@
 				this.mescroll.optUp.textNoMore = '没有更多了'
 			},
 			/*下拉刷新的回调*/
-			downCallback(m_mescroll){
+			downCallback(){
 				this.mescroll.resetUpScroll(); // 重置列表为第一页 (自动执行 page.num=1, 再触发upCallback方法 )
 			},
 			/*上拉加载的回调*/

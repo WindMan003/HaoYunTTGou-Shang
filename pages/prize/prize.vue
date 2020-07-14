@@ -42,7 +42,7 @@
 						color: '#FF3333'
 					}
 				},
-				link: ''
+				link: '',
 			}
 		},
 		onLoad() {
@@ -52,8 +52,7 @@
 				}
 			})
 			
-			this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)
-			console.log(this.link)
+			this.getLink()
 			
 			// #ifdef APP-PLUS
 			var _self = this
@@ -66,10 +65,14 @@
 				data.wvid = 'ActivityIndex'
 				data.webview = wv
 				_self.initWebview(data)
+				
+				_self.initWebviewStyle(wv)
 			}, 1000); //如果是页面初始化调用时，需要延时一下
 			// #endif
 		},
-		
+		onShow() {
+
+		},
 		computed:{
 			...mapState({
 				merchantSite:state=>state.user.merchantSite,
@@ -81,18 +84,24 @@
 			...mapMutations([
 				'initWebview'
 			]),
+			initWebviewStyle(m_web){
+				let link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)
+				m_web.loadURL(link)
+				m_web.setStyle({	// 开启下拉刷新功能
+					pullToRefresh:{
+						support:true
+					}
+				});
+				m_web.addEventListener('pullToRefresh', function(){	// 监听下拉刷新
+					plus.nativeUI.toast('更新完成!');
+					m_web.endPullToRefresh();
+				}, false);
+			},
 			getLink(){
 				// let date = new Date().getTime();
 				// this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)+'&t='+date
 				this.link = this.merchantSite + '/Activity/index' + '?token=' + encodeURIComponent(this.token)
-				// this.link = 'https://update.tuanmi028.com/test111.html'
 				console.log(this.link)
-			},
-			prizeInfo(){
-				let value = 'action=/Activity/index'
-				uni.navigateTo({
-					url: '../webview/webview?'+value
-				})
 			},
 			handleMessage(evt) {
 				console.log('接收到的消息：' + JSON.stringify(evt.detail)); 
@@ -111,7 +120,13 @@
 					}
 				}
 				return null
-			}
+			},
+			prizeInfo(){
+				let value = 'action=/Activity/index'
+				uni.navigateTo({
+					url: '../webview/webview?'+value
+				})
+			},
 		}
 	}
 </script>

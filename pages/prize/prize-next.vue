@@ -24,13 +24,13 @@
 				menuList: [],
 			}
 		},
-		onLoad() {
+		onLoad(option) {
 			uni.getSystemInfo({
 				success: (res) => {
 					this.windowHeight = res.windowHeight
 				}
 			})
-			this.initMenu()
+			this.menuList = JSON.parse(decodeURIComponent(option.item))
 		},
 		computed:{
 			...mapState({
@@ -42,26 +42,13 @@
 		methods: {
 			...mapMutations([
 			]),
-			initMenu(){
-				var _self = this;
-				_self.$H.post('/api/merchant/ActivityMenu',{},{
-					token:true
-				}).then(res=>{	
-					console.log(res)
-					if(res.status == 0){
-						_self.menuList = res.data
-					}else{
-						_self.$Common.showToast(res)
-					}
-				})
-			},
 			jumpPageView(m_item){
-				var nextList = this.getNextMenu(m_item.ID)
-				if(nextList.length > 0){
-					uni.navigateTo({
-						url: './prize-next?list=' + encodeURIComponent(JSON.stringify(nextList))
-					})
-				}else{
+				// var nextList = this.getNextMenu(m_item.ID)
+				// if(nextList.length > 0){
+				// 	uni.navigateTo({
+				// 		url: './prize-next?list=' + encodeURIComponent(JSON.stringify(nextList))
+				// 	})
+				// }else{
 					if(m_item.IsWebView == 1){
 						var link = this.merchantSite + m_item.PagePath + '?token=' + encodeURIComponent(this.token)
 						uni.navigateTo({
@@ -70,7 +57,7 @@
 					}else{
 						
 					}
-				}
+				// }
 			},
 			getNextMenu(m_id){
 				var temp = this.menuList

@@ -37,8 +37,8 @@
 				</block>
 				<divider/>
 				
-				<uni-list-item showExtraIcon leftIconStyle="color:#808C98;" leftIcon="icon-icon_set_up" title="更多设置"
-				@click="navigate('set', false)"></uni-list-item>
+				<!-- <uni-list-item title="消费返代金券" @click="navigate('rebate', false)"></uni-list-item> -->
+				<uni-list-item title="更多设置" @click="navigate('set', false)"></uni-list-item>
 			</view>
 			
 			<view class="" style="height: 100rpx;"></view>

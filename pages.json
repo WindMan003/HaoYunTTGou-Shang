@@ -209,7 +209,12 @@
         },{
             "path" : "pages/prize/prize",
             "style" : {
-				"navigationBarTitleText": "抽奖活动"
+				"navigationBarTitleText": "活动"
+			}
+        },{
+            "path" : "pages/prize/prize-next",
+            "style" : {
+				"navigationBarTitleText": "活动"
 			}
         },{
             "path" : "pages/prize/prize-add",
@@ -249,6 +254,12 @@
             "path" : "pages/binddevice/bind-newdevice",
             "style" : {
 				"navigationBarTitleText": "绑定"
+			}
+        }
+        ,{
+            "path" : "pages/rebate/rebate",
+            "style" : {
+				"navigationBarTitleText": "返利代金券"
 			}
         }
     ],

@@ -63,7 +63,7 @@
 					})
 				}else{
 					if(m_item.IsWebView == 1){
-						var link = this.merchantSite + m_item.PagePath + '?token=' + encodeURIComponent(this.token)
+						var link = this.merchantSite + m_item.PagePath
 						uni.navigateTo({
 							url: '../webview/webview-jump?jumpurl=' + link + '&wvid=' + m_item.WVID
 						})

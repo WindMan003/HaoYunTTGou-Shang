@@ -4,13 +4,13 @@
 			<view class="font-30 font-weight ml-3">桌子号：</view>
 			<input class="font-30 border ml" style="width: 200rpx;" type="text" :value="tableIDText"
 			placeholder="请输入桌子号" maxlength="20" @blur="tableIDInput"/>
-			<view class="border font-26 ml pl-2 pr-2 btn-blue-white" @click="createQRCode">生成</view>
+			<view class="border font-26 ml pl-2 pr-2 btn-orange-white" @click="createQRCode">生成</view>
 		</view>
 		
 		<view class="d-flex flex-row a-center border-bottom position-relative" style="height: 80rpx;">
 			<view class="font-30 font-weight ml-3">已选:{{getSelectQRCodeCount}}</view>
-			<view class="border font-26 ml-4 pl-2 pr-2 btn-blue-white" @click="saveToPhotoAlbum">批量保存到相册</view>
-			<view class="border font-26 pl-2 pr-2 btn-blue-white position-absolute" @click="selectAll" style="right: 40rpx;">全选</view>
+			<view class="border font-26 ml-4 pl-2 pr-2 btn-orange-white" @click="saveToPhotoAlbum">批量保存到相册</view>
+			<view class="border font-26 pl-2 pr-2 btn-orange-white position-absolute" @click="selectAll" style="right: 40rpx;">全选</view>
 		</view>
 		
 		<scroll-view scroll-y :style="'height:'+(totalH - 80)+'px;'">

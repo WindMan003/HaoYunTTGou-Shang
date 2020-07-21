@@ -10,7 +10,7 @@
 				<view class="d-flex border a-center font-30 bg-white" style="width: 300rpx; height: 60rpx;">
 					<input class="ml-2" type="number" :value="oldCode" placeholder="验证码" maxlength="6" @blur="oldCodeInput"/>
 				</view>
-				<view class="ml-2 border btn-blue-white" @click="sendoldCode"
+				<view class="ml-2 border btn-orange-white" @click="sendoldCode"
 				style="width: 180rpx; height: 60rpx; border-radius: 5rpx;">
 					<text class="font-26 d-flex a-center j-center" style="height: 60rpx;">{{codeBut1}}</text>
 				</view>
@@ -24,7 +24,7 @@
 				<view class="d-flex border a-center font-30 bg-white" style="width: 300rpx; height: 60rpx;">
 					<input class="ml-2" type="number" :value="newCode" placeholder="验证码" maxlength="6" @blur="newCodeInput"/>
 				</view>
-				<view class="ml-2 border btn-blue-white" @click="sendnewCode"
+				<view class="ml-2 border btn-orange-white" @click="sendnewCode"
 				style="width: 180rpx; height: 60rpx; border-radius: 5rpx;">
 					<text class="font-26 d-flex a-center j-center" style="height: 60rpx;">{{codeBut2}}</text>
 				</view>

@@ -262,6 +262,12 @@
 				"navigationBarTitleText": "返利代金券"
 			}
         }
+        ,{
+            "path" : "pages/fullreduction/fullreduction",
+            "style" : {
+				"navigationBarTitleText": "满减活动"
+			}
+        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

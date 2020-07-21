@@ -45,7 +45,7 @@
 					<view class="d-flex border a-center font-30 bg-white" style="margin-left: 120rpx; width: 300rpx; height: 60rpx;">
 						<input class="ml-1" type="number" :value="phoneCode" placeholder="验证码" maxlength="6" @blur="phoneCodeInput"/>
 					</view>
-					<view class="ml-2 border btn-blue-white" @click="sendphoneCode"
+					<view class="ml-2 border btn-orange-white" @click="sendphoneCode"
 					style="width: 180rpx; height: 60rpx; border-radius: 5rpx;">
 						<text class="font-26 d-flex a-center j-center" style="height: 60rpx;">{{codeBut}}</text>
 					</view>
@@ -92,10 +92,10 @@
 	export default {
 		data() {
 			return {
-				account:'',
-				password:'',
-				// account:'qazwsxedc',
-				// password:'123123',
+				// account:'',
+				// password:'',
+				account:'qazwsxedc',
+				password:'123123',
 				phone: '',
 				phoneCode: '',
 				loginType: 1,

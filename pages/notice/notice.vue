@@ -1,7 +1,7 @@
 <template>
 	<view class="w-100">
 		<view class="d-flex flex-row a-center border-bottom position-relative" style="height: 80rpx;">
-			<view class="border font-26 ml pl-2 pr-2 btn-blue-white position-absolute" @click="jumpNoticeInfo"
+			<view class="border font-26 ml pl-2 pr-2 btn-orange-white position-absolute" @click="jumpNoticeInfo"
 			style="right: 40rpx;">新增公告</view>
 		</view>
 		

@@ -23,7 +23,7 @@
 		</view>
 		
 		<view class="d-flex a-center j-center mt-4">
-			<view class="border font-32 p pl-3 pr-3 btn-blue-white rounded-10" @click="changeNotice">
+			<view class="border font-32 p pl-3 pr-3 btn-orange-white rounded-10" @click="changeNotice">
 				保存修改
 			</view>
 		</view>

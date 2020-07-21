@@ -21,7 +21,7 @@
 		</view>
 		
 		<view class="d-flex a-center j-center mt-4">
-			<view class="border font-32 p pl-3 pr-3 btn-blue-white rounded-10" @click="newAddNotice">
+			<view class="border font-32 p pl-3 pr-3 btn-orange-white rounded-10" @click="newAddNotice">
 				保存新增
 			</view>
 		</view>

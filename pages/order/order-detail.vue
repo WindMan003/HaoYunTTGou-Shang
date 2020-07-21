@@ -13,13 +13,13 @@
 						<view class="font-26 ml-1 d-flex a-center border">
 							<input style="width: 100rpx;" type="text" :value="tableNumberText" maxlength="10" @input="tableNumInput"/>
 						</view>
-						<view class="font-26 border pl-1 pr-1 btn-blue-white" @click="setTableNum">设置桌号</view>
+						<view class="font-26 border pl-1 pr-1 btn-orange-white" @click="setTableNum">设置桌号</view>
 					</view>
 				</view>
 			
 				<view class="w-100 d-flex flex-row a-center ml-1 mt-1">
-					<view class="font-26 border pl-1 pr-1 btn-blue-white" @click="selectAll">全选</view>
-					<view class="font-26 border pl-1 pr-1 ml-3 btn-blue-white" @click="setStatusSubmit">设置已上</view>
+					<view class="font-26 border pl-1 pr-1 btn-orange-white" @click="selectAll">全选</view>
+					<view class="font-26 border pl-1 pr-1 ml-3 btn-orange-white" @click="setStatusSubmit">设置已上</view>
 				</view>
 				
 				<view class="w-100 d-flex flex-row a-center ml-1 mt-1" v-if="getConfirmShow">
@@ -85,11 +85,11 @@
 					</view>
 					<view class="d-flex flex-row" style="width: 45%;">
 						<block v-if="(getCancelShow && getConfirmShow)">
-							<view class="font-26 border pl-1 pr-1 ml-1 btn-blue-white" @click="cancelOrder">取消订单</view>
+							<view class="font-26 border pl-1 pr-1 ml-1 btn-orange-white" @click="cancelOrder">取消订单</view>
 							<view class="font-26 border pl-1 pr-1 ml-2 btn-orange-white" @click="confirmOrder">确认订单</view>
 						</block>
 						<block v-else-if="getCancelShow">
-							<view class="font-26 border pl-1 pr-1 ml-1 btn-blue-white" @click="finishOrder">完成订单</view>
+							<view class="font-26 border pl-1 pr-1 ml-1 btn-orange-white" @click="finishOrder">完成订单</view>
 							<view class="font-26 border pl-1 pr-1 ml-2 btn-orange-white" @click="cancelOrder">取消订单</view>
 						</block>
 					</view>

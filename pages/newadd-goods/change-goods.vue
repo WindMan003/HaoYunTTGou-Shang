@@ -35,8 +35,8 @@
 				<view class="d-flex flex-row">
 					<view class="font-30 font-weight">产品图片</view>
 					<view class="font-24 ml-1" style="color: #FF0000;">*</view>
-					<view class="ml-4 border font-28 pl-1 pr-1" @click="upload"
-					style="background-color: #007AFF; color: #FFFFFF; border-radius: 10rpx;">上传图片</view>
+					<view class="ml-4 border font-28 pl-1 pr-1 btn-orange-white" @click="upload"
+					style="border-radius: 10rpx;">上传图片</view>
 				</view>
 				<view class="border mt" style="width: 400rpx; height: 400rpx; border-radius: 10rpx;">
 					<image :src="picUrl" mode="aspectFit" style="width: 400rpx; height: 400rpx;"></image>
@@ -44,8 +44,8 @@
 			</view>
 		
 			<view class="d-flex mt-2">
-				<view class="border font-28 pl-1 pr-1"  @click="addGoodsSpec"
-				style="border-radius: 10rpx; background-color: #007AFF; color: #FFFFFF;">{{specTitle}}</view>
+				<view class="border font-28 pl-1 pr-1 btn-orange-white"  @click="addGoodsSpec"
+				style="border-radius: 10rpx;">{{specTitle}}</view>
 			</view>
 			<view class="d-flex flex-row flex-wrap a-center" style="width: 500rpx;">
 				<view class="d-flex flex-row" v-for="(item1,index1) in SpecificationList" :key="index1">
@@ -58,8 +58,8 @@
 			</view>
 			
 			<view class="d-flex mt-2">
-				<view class="border font-28 pl-1 pr-1"  @click="addGoodsTaste"
-				style="border-radius: 10rpx; background-color: #007AFF; color: #FFFFFF;">{{tasteTitle}}</view>
+				<view class="border font-28 pl-1 pr-1 btn-orange-white"  @click="addGoodsTaste"
+				style="border-radius: 10rpx;">{{tasteTitle}}</view>
 			</view>
 			<view class="d-flex flex-row flex-wrap a-center mt-1" style="width: 500rpx;">
 				<view class="d-flex flex-row" v-for="(item1,index1) in TasteList" :key="index1">
@@ -116,8 +116,8 @@
 			</view>
 			
 			<view class="d-flex a-center j-center mt-2">
-				<view class="border font-38 pl-1 pr-1"  @click="uploadInfo"
-				style="border-radius: 10rpx; background-color: #007AFF; color: #FFFFFF;">{{btnName}}</view>
+				<view class="border font-38 pl-1 pr-1 btn-orange-white"  @click="uploadInfo"
+				style="border-radius: 10rpx;">{{btnName}}</view>
 			</view>
 			
 			<view class="" style="height: 70rpx;"></view>

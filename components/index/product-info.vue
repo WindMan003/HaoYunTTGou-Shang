@@ -11,19 +11,19 @@
 				<input class="ml-1 border font-30" style="width: 150rpx;" type="text" :value="nameString" 
 				placeholder="产品名称" maxlength="8" @input="nameInput"/>
 				
-				<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white" style="border-radius: 10rpx;" @click="check">
+				<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white" style="border-radius: 10rpx;" @click="check">
 					查询
 				</view>
 				
-				<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white" style="border-radius: 10rpx;" @click="clearInput">
+				<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white" style="border-radius: 10rpx;" @click="clearInput">
 					清空
 				</view>
 				
-				<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white" style="border-radius: 10rpx;" @click="newAddGoods">
+				<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white" style="border-radius: 10rpx;" @click="newAddGoods">
 					新增
 				</view>
 				
-				<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white" style="border-radius: 10rpx;" @click="refresh">
+				<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white" style="border-radius: 10rpx;" @click="refresh">
 					刷新
 				</view>
 			</view>

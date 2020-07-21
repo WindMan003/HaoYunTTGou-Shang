@@ -28,8 +28,8 @@
 				</view>
 				
 				<view class="d-flex flex-row a-center ml-1 j-end">
-					<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="checkPayStatus" v-if="item.Status == 2">查询支付</view>
-					<view class="font-28 border mr-3 pl-1 pr-1 btn-blue-white" @click="printOrder(item.PrintCount)" 
+					<view class="font-28 border mr-3 pl-1 pr-1 btn-orange-white" @click="checkPayStatus" v-if="item.Status == 2">查询支付</view>
+					<view class="font-28 border mr-3 pl-1 pr-1 btn-orange-white" @click="printOrder(item.PrintCount)" 
 					v-if="item.Status == 3 || item.Status == 1">打印订单</view>
 				</view>
 			</view>
@@ -79,7 +79,6 @@
 			...mapMutations([
 			]),
 			...mapActions([
-				'updateGoodsListFunc'
 			]),
 			getStatusText(m_item){
 				let temp = this.statusList
@@ -185,28 +184,28 @@
 					console.log(res)
 					if(res.status == 0){
 						_self.OrderItem = res.data.OrderItem
-						_self.tidyProductList(res.data.ProductList)
+						// _self.tidyProductList(res.data.ProductList)
 						_self.gotoPrintOrder(printCount)
 					}else{
 						_self.$Common.showToast(res)
 					}
 				})
 			},
-			tidyProductList(list){
-				var temp = this.OrderItem
-				this.ProductList = []
-				for (var i = temp.AddRound; i >= 0; i--) {
-					let newItem = {addRound: i, list: []}
-					for (var j = 0; j < list.length; j++) {
-						if(list[j].AddRound == i){
-							newItem.list.push(list[j])
-							break
-						}
-					}
-					this.ProductList.push(newItem)
-				}
-				this.ProductList.reverse()
-			},
+			// tidyProductList(list){
+			// 	var temp = this.OrderItem
+			// 	this.ProductList = []
+			// 	for (var i = temp.AddRound; i >= 0; i--) {
+			// 		let newItem = {addRound: i, list: []}
+			// 		for (var j = 0; j < list.length; j++) {
+			// 			if(list[j].AddRound == i){
+			// 				newItem.list.push(list[j])
+			// 				break
+			// 			}
+			// 		}
+			// 		this.ProductList.push(newItem)
+			// 	}
+			// 	this.ProductList.reverse()
+			// },
 			gotoPrintOrder(printCount){
 				var _self = this
 				var printOrderLit = _self.ProductList
@@ -218,7 +217,7 @@
 						success: function (res) {
 							if (res.confirm) {
 								// _self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
-								_self.printOrderSure()
+								_self.printOrderSure(false)
 							} else if (res.cancel) {
 								console.log('用户点击取消');
 							}
@@ -226,10 +225,10 @@
 					});
 				}else{
 					// _self.$refs.sendCommand.receiptOrder(_self.OrderItem, printOrderLit, _self.item.StatusText)
-					_self.printOrderSure()
+					_self.printOrderSure(true)
 				}
 			},
-			printOrderSure(){
+			printOrderSure(m_bool){
 				var _self = this;
 				_self.$H.post('/API/Order/PrintOrder',{
 					OrderID: _self.item.ID,
@@ -239,7 +238,20 @@
 				}).then(res=>{
 					console.log(res)
 					if(res.status == 0){
-						_self.printComplete()
+						uni.showToast({ title: '打印成功', icon: 'none', duration: 1500 })
+						var temp = _self.orderList
+						for (let i = 0; i < temp.length; i++) {
+							if(temp[i].ID == _self.item.ID){
+								if(m_bool){
+									// 打印成功，清除数据
+									_self.orderList.splice(i, 1)
+								}else{
+									// 打印成功，打印次数增加
+									_self.orderList[i].PrintCount = _self.orderList[i].PrintCount + 1
+								}
+								break
+							}
+						}
 					}else{
 						_self.$Common.showToast(res)
 					}
@@ -247,16 +259,16 @@
 			},
 			printComplete(){
 				console.log('打印完成，回调结束')
-				var _self = this
-				let postData = { OrderID:_self.OrderItem.ID }
-				_self.$H.post('/api/order/PrintOk', postData, {
-					token:true
-				}).then(res=>{
-					console.log(res)
-					if(res.status == 0){
-						_self.initOrderView()
-					}
-				})
+				// var _self = this
+				// let postData = { OrderID:_self.OrderItem.ID }
+				// _self.$H.post('/api/order/PrintOk', postData, {
+				// 	token:true
+				// }).then(res=>{
+				// 	console.log(res)
+				// 	if(res.status == 0){
+				// 		_self.initOrderView()
+				// 	}
+				// })
 			},
 			initOrderView(){
 				var _self = this;

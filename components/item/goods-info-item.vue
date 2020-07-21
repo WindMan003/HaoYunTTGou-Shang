@@ -41,12 +41,9 @@
 			</view>
 			
 			<view class="d-flex flex-row a-center j-end">
-				<view class="font-28 border pl-1 pr-1" style="background-color: #007AFF; color: #FFFFFF;"
-				@click="changeType">详情</view>
-				<view class="ml-1 font-28 border pl-1 pr-1" style="background-color: #007AFF; color: #FFFFFF;"
-				@click="changeType">修改</view>
-				<view class="ml-1 font-28 border pl-1 pr-1 mr-3" style="background-color: #007AFF; color: #FFFFFF;"
-				@click="deleteGoods">删除</view>
+				<view class="font-28 border pl-1 pr-1 btn-orange-white" @click="changeType">详情</view>
+				<view class="ml-1 font-28 border pl-1 pr-1 btn-orange-white" @click="changeType">修改</view>
+				<view class="ml-1 font-28 border pl-1 pr-1 mr-3 btn-orange-white" @click="deleteGoods">删除</view>
 			</view>
 		</view>
 	</view>

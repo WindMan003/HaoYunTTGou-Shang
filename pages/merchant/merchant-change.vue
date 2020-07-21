@@ -59,7 +59,7 @@
 				
 				<view class="d-flex flex-row mt-2">
 					<view class="font-30 font-weight">门面图片:</view>
-					<view class="ml-4 border font-28 pl-1 pr-1 btn-blue-white" @click="uploadFaceImg" style="border-radius: 10rpx;">上传门面图片</view>
+					<view class="ml-4 border font-28 pl-1 pr-1 btn-orange-white" @click="uploadFaceImg" style="border-radius: 10rpx;">上传门面图片</view>
 				</view>
 				<view class="mt-1" style="width: 94%;">
 					<image class="rounded-10" :src="uploadPicUrl" mode="widthFix"></image>
@@ -67,7 +67,7 @@
 				
 				<view class="d-flex flex-row mt-2">
 					<view class="font-30 font-weight">更多图片:</view>
-					<view class="ml-4 border font-28 pl-1 pr-1 btn-blue-white rounded-10" @click="uploadMoreImg">上传更多图片</view>
+					<view class="ml-4 border font-28 pl-1 pr-1 btn-orange-white rounded-10" @click="uploadMoreImg">上传更多图片</view>
 				</view>
 				<view class="mt-1" style="width: 94%;">
 					<view class="position-relative" v-for="(item, index) in moreImgList" :key="index">

@@ -10,7 +10,7 @@
 				<view class="d-flex border a-center font-30 bg-white" style="width: 300rpx; height: 60rpx;">
 					<input class="ml-2" type="number" :value="code" placeholder="验证码" maxlength="6" @blur="phoneCodeInput"/>
 				</view>
-				<view class="ml-2 border btn-blue-white" @click="sendphoneCode"
+				<view class="ml-2 border btn-orange-white" @click="sendphoneCode"
 				style="width: 180rpx; height: 60rpx; border-radius: 5rpx;">
 					<text class="font-26 d-flex a-center j-center" style="height: 60rpx;">{{codeBut}}</text>
 				</view>

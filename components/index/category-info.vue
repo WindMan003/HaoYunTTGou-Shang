@@ -3,10 +3,10 @@
 		<view class="border-bottom w-100 d-flex flex-row a-center" style="height: 90rpx;">
 			<input class="border font-30" style="width: 150rpx;" type="text" :value="nameString" 
 			placeholder="输入名称" maxlength="8" @input="nameInput"/>
-			<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white rounded-10" @click="check">查询</view>
-			<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white rounded-10" @click="clearInput">清空</view>
-			<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white rounded-10" @click="newAddGoodsType">新增</view>
-			<view class="ml-1 border font-30 pl-1 pr-1 btn-blue-white rounded-10" @click="refresh">刷新</view>
+			<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white rounded-10" @click="check">查询</view>
+			<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white rounded-10" @click="clearInput">清空</view>
+			<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white rounded-10" @click="newAddGoodsType">新增</view>
+			<view class="ml-1 border font-30 pl-1 pr-1 btn-orange-white rounded-10" @click="refresh">刷新</view>
 		</view>
 		<view class="border-bottom w-100 d-flex flex-row a-center font-28" style="height: 60rpx;">
 			<view class="text-center" style="width: 35%;">操作</view>

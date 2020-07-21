@@ -80,7 +80,7 @@
 						<input class="font-30 ml-1" type="number" :value="mobilephoneText" placeholder="手机号" maxlength="11" @blur="mobilephoneInput"/>
 					</view>
 					<view class="d-flex flex-row a-center mt-1" style="height: 50rpx;">
-						<view class="border font-26 pl-1 pr-1 text-center btn-blue-white" @click="sendphoneCode" 
+						<view class="border font-26 pl-1 pr-1 text-center btn-orange-white" @click="sendphoneCode" 
 						style="border-radius: 5rpx; width: 160rpx;">
 							{{codeBut}}
 						</view>

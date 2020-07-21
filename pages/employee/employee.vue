@@ -5,10 +5,10 @@
 				<input class="font-30 border" style="width: 200rpx;" type="text" :value="nickName" 
 				placeholder="员工昵称" @input="nickNameInput"/>
 			</view>
-			<view class="border font-30 ml-1 pl-1 pr-1 btn-blue-white" @click="check">查询</view>
-			<view class="border font-30 ml-1 pl-1 pr-1 btn-blue-white" @click="clear">清空</view>
-			<view class="border font-30 ml-1 pl-1 pr-1 btn-blue-white" @click="refresh">刷新</view>
-			<view class="border font-30 ml-2 pl-2 pr-2 btn-blue-white" @click="newadd">新增账号</view>
+			<view class="border font-30 ml-1 pl-1 pr-1 btn-orange-white" @click="check">查询</view>
+			<view class="border font-30 ml-1 pl-1 pr-1 btn-orange-white" @click="clear">清空</view>
+			<view class="border font-30 ml-1 pl-1 pr-1 btn-orange-white" @click="refresh">刷新</view>
+			<view class="border font-30 ml-2 pl-2 pr-2 btn-orange-white" @click="newadd">新增账号</view>
 		</view>
 		
 		<view class="d-flex flex-row a-center border-bottom font-30" style="height: 80rpx;">
@@ -26,8 +26,8 @@
 						<view class="text-center" style="width: 20%;">{{item.Name}}</view>
 						<view class="text-center" style="width: 20%;">{{getEnableText(item.Enabled)}}</view>
 						<view class="d-flex flex-row a-center j-center" style="width: 40%;">
-							<view class="border font-26 pl-2 pr-2 btn-blue-white" @click="change(index)">修改</view>
-							<view class="border font-26 ml-1 pl-2 pr-2 btn-blue-white" @click="deleteItem(index)">删除</view>
+							<view class="border font-26 pl-2 pr-2 btn-orange-white" @click="change(index)">修改</view>
+							<view class="border font-26 ml-1 pl-2 pr-2 btn-orange-white" @click="deleteItem(index)">删除</view>
 						</view>
 					</view>
 				</block>

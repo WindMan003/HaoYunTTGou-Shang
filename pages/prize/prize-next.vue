@@ -30,7 +30,7 @@
 					this.windowHeight = res.windowHeight
 				}
 			})
-			this.menuList = JSON.parse(decodeURIComponent(option.item))
+			this.menuList = JSON.parse(decodeURIComponent(option.list))
 		},
 		computed:{
 			...mapState({

@@ -1,15 +1,15 @@
 <template>
 	<view class="border-bottom w-100 d-flex flex-row a-center font-28" style="height: 60rpx;">
 		<view class="d-flex flex-row a-center j-center" style="width: 35%;">
-			<view class="font-28 border pl-1 pr-1 btn-blue-white" @click="changeType">修改</view>
-			<view class="ml font-28 border pl-1 pr-1 btn-blue-white" @click="deleteType">删除</view>
+			<view class="font-28 border pl-1 pr-1 btn-orange-white" @click="changeType">修改</view>
+			<view class="ml font-28 border pl-1 pr-1 btn-orange-white" @click="deleteType">删除</view>
 		</view>
 		<view class="text-center" style="width: 28%;">{{item.Name}}</view>
 		<view class="d-flex a-center j-center position-relative" style="width: 28%;">
 			<input class="border text-center" style="width: 100rpx;" type="number" :value="item.SortValue" @blur="sortValueInput"/>
 		</view>
 		<block v-if="showChange">
-			<view class="font-24 border pl-1 pr-1 btn-blue-white position-absolute" style="right: 10rpx;"
+			<view class="font-24 border pl-1 pr-1 btn-orange-white position-absolute" style="right: 10rpx;"
 			@click="changeSortValue">修改</view>
 		</block>
 		<newadd-popup ref="addPopup"></newadd-popup>

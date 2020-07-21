@@ -140,7 +140,7 @@
 				passwordAgnText:'',
 				mobilephoneText:'',
 				mobilephoneCodeText:'',
-				agentIDText:''
+				agentIDText:'',
 			}
 		},
 		onLoad() {
@@ -333,19 +333,21 @@
 					if(res.status === 0){
 						
 					}else{
-						uni.showToast({title:res.message, icon:'none', duration:1000})
+						uni.showToast({title:res.message, icon:'none', duration:1500})
 					}
 				})
 			},
 			saveChange(){
 				var _self = this;
+				// 判断重复点击
 				var bool = _self.checkInformation()
 				if(!bool){
 					return false
 				}
-				if(this.agentIDText == ''){
-					this.agentIDText = 0
+				if(_self.agentIDText == ''){
+					_self.agentIDText = 0
 				}
+				if(!_self.$Common.butClickStart()) return;
 				_self.$H.post('/api/Merchant/Register',{
 					Name:_self.nameText,
 					Account:_self.accountText,
@@ -362,6 +364,7 @@
 					token:true
 				}).then(res=>{
 					console.log(res)
+					_self.$Common.butClickEnd();
 					if(res.status == 0){
 						uni.setStorageSync('m_token', res.data.token)
 						_self.login(res.data)
@@ -369,37 +372,37 @@
 							url: '/pages/index/index'
 						})
 					}else{
-						uni.showToast({title:res.message, icon:'none', duration:1000})
+						uni.showToast({title:res.message, icon:'none', duration:1500})
 					}
 				})
 			},
 			checkInformation(){
 				if(this.serviceType == ''){
-					uni.showToast({title:'店铺行业未选', icon:'none', duration:1000})
+					uni.showToast({title:'店铺行业未选', icon:'none', duration:1500})
 					return false
 				}
 				if(this.merchantType == ''){
-					uni.showToast({title:'店铺类别未选', icon:'none', duration:1000})
+					uni.showToast({title:'店铺类别未选', icon:'none', duration:1500})
 					return false
 				}
 				if(this.nameText == ''){
-					uni.showToast({title:'店铺名字不能为空', icon:'none', duration:1000})
+					uni.showToast({title:'店铺名字不能为空', icon:'none', duration:1500})
 					return false
 				}
 				if(this.accountText == ''){
-					uni.showToast({title:'账号不能为空', icon:'none', duration:1000})
+					uni.showToast({title:'账号不能为空', icon:'none', duration:1500})
 					return false
 				}
 				if(this.passwordText == ''){
-					uni.showToast({title:'密码不能为空', icon:'none', duration:1000})
+					uni.showToast({title:'密码不能为空', icon:'none', duration:1500})
 					return false
 				}
 				if(this.passwordText != this.passwordAgnText){
-					uni.showToast({title:'两次密码不一样', icon:'none', duration:1000})
+					uni.showToast({title:'两次密码不一样', icon:'none', duration:1500})
 					return false
 				}
 				if(this.mobilephoneText == ''){
-					uni.showToast({title:'手机号不能为空', icon:'none', duration:1000})
+					uni.showToast({title:'手机号不能为空', icon:'none', duration:1500})
 					return false
 				}
 				if(this.mobilephoneCodeText == ''){

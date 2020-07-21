@@ -1,5 +1,6 @@
 import $md5 from './md5.js'
 export default {
+	isClick: true,
 	sort_ascii(obj, signkey) {
 		let arr = new Array();
 		let num = 0;
@@ -33,5 +34,22 @@ export default {
 				showCancel: false
 			});
 		}
+	},
+	butClickStart(){
+		if(!this.isClick){
+			console.log('clicking')
+			uni.showToast({title: '请不要重复点击', icon:'none', duration:1500})
+			return false
+		}
+		console.log('clickstart')
+		this.isClick = false
+		setTimeout(()=>{
+			this.isClick = true
+		}, 2000)
+		return true
+	},
+	butClickEnd(){
+		console.log('clickend')
+		this.isClick = true
 	}
 }

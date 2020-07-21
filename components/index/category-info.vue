@@ -26,7 +26,7 @@
 		</view>
 		<scroll-view scroll-y :croll-with-animation="true" :style="'height:'+(totalH - 76)+'px;'">
 			<view class="" style="height: 70rpx;" v-for="(item,index) in goodsTypeList" :key="index">
-				<category-info-item :item="item"></category-info-item>
+				<category-info-item :item="item" @updateSort="updateSort"></category-info-item>
 			</view>
 			<view class="d-flex j-center font-22 p-1" style="color: #007AFF;" v-if="isShowLoadMoreBoole" @click="loadMore">加载更多</view>
 			<view class="d-flex j-center font-22 p-1" style="color: #C8C7CC;" v-else>没有更多了~</view>
@@ -123,6 +123,7 @@
 					})
 					return
 				}
+				this.defaultPageIndex = 1
 				this.requestData('check')
 			},
 			refresh(){
@@ -152,11 +153,12 @@
 				this.defaultPageIndex = 1
 				this.requestData()
 			},
+			updateSort(){
+				this.defaultPageIndex = 1
+				this.requestData()
+			},
 			requestData(className){
 				var _self = this;
-				if(className != 'loadMore'){
-					_self.defaultPageIndex = 1
-				}
 				_self.$H.post('/api/ProductType/List',{
 					Name:_self.nameString,
 					SortName:_self.sortName,

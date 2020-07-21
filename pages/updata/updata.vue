@@ -67,16 +67,16 @@
 					this.nextTo()
 					return
 				}
-				this.nextTo()
-				// if(Number(versions[0]) > Number(currentVersions[0])){
-				// 	// 有大版本更新
-				// 	this.versionUpdate(versionUrl)
-				// }else if(Number(hotVersions[1]) > Number(currentVersions[1]) || Number(hotVersions[2]) > Number(currentVersions[2])){
-				// 	// 有热更新
-				// 	this.hotUpdate(data.HotUpdateUrl, data.HotUpdateVersion)
-				// }else{
-				// 	this.nextTo()
-				// }
+				// this.nextTo()
+				if(Number(versions[0]) > Number(currentVersions[0])){
+					// 有大版本更新
+					this.versionUpdate(versionUrl)
+				}else if(Number(hotVersions[1]) > Number(currentVersions[1]) || Number(hotVersions[2]) > Number(currentVersions[2])){
+					// 有热更新
+					this.hotUpdate(data.HotUpdateUrl, data.HotUpdateVersion)
+				}else{
+					this.nextTo()
+				}
 			},
 			//热更新
 			hotUpdate(m_url, m_version){

@@ -75,7 +75,8 @@
 			},
 			sortValueInput(e){
 				this.sortValue = e.detail.value
-				this.isShowChange()
+				this.changeSortValue()
+				// this.isShowChange()
 			},
 			isShowChange(){
 				if(this.sortValue != this.item.SortValue){
@@ -116,15 +117,16 @@
 				}).then(res=>{
 					console.log(res)
 					if(res.status == 0){
+						uni.showToast({title: '修改成功', icon:'none', duration:1500})
 						let tempList = _self.goodsTypeList
 						for (var i = 0; i < tempList.length; i++) {
 							if(tempList[i].ID == _self.item.ID){
 								tempList[i].SortValue = _self.sortValue
+								this.$emit("updateSort")
 								break
 							}
 						}
-						_self.showChange = false
-						uni.showToast({title: '修改成功', icon:'none', duration:1500})
+						// _self.showChange = false
 					}else{
 						uni.showToast({title: res.message, icon:'none', duration:1500})
 					}

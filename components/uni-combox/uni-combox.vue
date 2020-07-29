@@ -5,7 +5,8 @@
 		</view>
 		<view class="uni-combox__input-box">
 			<!--@focus="onFocus" @blur="onBlur" -->
-			<input class="uni-combox__input" type="text" :placeholder="placeholder" v-model="inputVal" @input="onInput"/> 
+			<!-- <input class="uni-combox__input" type="text" :placeholder="placeholder" v-model="inputVal" @input="onInput"/> -->
+			<view class="uni-combox__input" @click="toggleSelector">{{inputVal}}</view>
 			<uni-icons class="uni-combox__input-arrow" type="arrowdown" size="14" @click="toggleSelector"></uni-icons>
 			<view class="uni-combox__selector" v-if="showSelector">
 				<scroll-view scroll-y="true" class="uni-combox__selector-scroll">
@@ -68,7 +69,7 @@
 		data() {
 			return {
 				showSelector: false,
-				inputVal: ''
+				inputVal: '请选择'
 			}
 		},
 		computed: {
@@ -93,14 +94,14 @@
 				return this.filterCandidates.length
 			}
 		},
-		watch: {
-			value: {
-				handler(newVal) {
-					this.inputVal = newVal
-				},
-				immediate: true
-			}
-		},
+		// watch: {
+		// 	value: {
+		// 		handler(newVal) {
+		// 			this.inputVal = newVal
+		// 		},
+		// 		immediate: true
+		// 	}
+		// },
 		methods: {
 			toggleSelector() {
 				this.showSelector = !this.showSelector

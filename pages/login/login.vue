@@ -102,10 +102,23 @@
 				codeBut: '发送验证码',
 				codeClick: true,
 				infoList: '',
-				accountInfo: ''
+				accountInfo: '',
+				phoneModel: 1, //1为安卓，2为IOS
 			}
 		},
 		onLoad() {
+			uni.getSystemInfo({
+				success(res) {
+					console.log(res) //手机型号
+					if(res.platform.indexOf("ios") != -1){
+						console.log("ios")
+						_self.phoneModel = 2
+					}else if(res.platform.indexOf("android") != -1){
+						console.log("android")
+						_self.phoneModel = 1
+					}
+				}
+			});
 			var m_token = uni.getStorageSync('m_token')
 			console.log(m_token)
 			if(m_token != ''){
@@ -160,6 +173,7 @@
 			loginByToken(m_token){
 				var _self = this
 				_self.$H.post('/api/merchant/ValidateToken',{
+					OsType: _self.phoneModel,
 					MachineID: _self.uuid,
 					token: m_token
 				}).then(res=>{
@@ -181,6 +195,7 @@
 				var _self = this
 				console.log("Mobilephone:"+_self.phone)
 				_self.$H.post('/api/merchant/GetAccountsByMobilephone',{
+					OsType: _self.phoneModel,
 					Mobilephone:_self.phone,
 					Code:_self.phoneCode
 				}).then(res=>{
@@ -233,6 +248,7 @@
 				console.log(_self.account, _self.password)
 				uni.showLoading({title: '登录中...'})
 				_self.$H.post('/api/merchant/Login',{
+					OsType: _self.phoneModel,
 					account:_self.account,
 					password:_self.$md5(_self.password),
 					UniPushClientID:_self.clientid,

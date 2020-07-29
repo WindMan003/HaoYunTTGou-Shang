@@ -144,7 +144,7 @@
 			}
 		},
 		onLoad() {
-			this.__init()
+			this.getServieTypeList()
 		},
 		beforeDestroy() {
 			clearInterval(this.timer)
@@ -203,9 +203,6 @@
 			...mapMutations([
 				'login'
 			]),
-			__init(){
-				this.getServieTypeList()
-			},
 			nameInput(e){
 				this.nameText = e.detail.value
 			},
@@ -339,14 +336,13 @@
 			},
 			saveChange(){
 				var _self = this;
-				// 判断重复点击
-				var bool = _self.checkInformation()
-				if(!bool){
+				if(!_self.checkInformation()){
 					return false
 				}
 				if(_self.agentIDText == ''){
 					_self.agentIDText = 0
 				}
+				// 判断重复点击
 				if(!_self.$Common.butClickStart()) return;
 				_self.$H.post('/api/Merchant/Register',{
 					Name:_self.nameText,

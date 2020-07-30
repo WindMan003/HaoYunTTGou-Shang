@@ -8,14 +8,14 @@
 	export default {
 		data() {
 			return {
-				phoneModel:'windows'
+				phoneModel: 'windows'
 			}
 		},
 		onLoad() {
 			var _self = this
 			// 获取系统信息
 			uni.getSystemInfo({
-				success(res) {
+				success: (res) => {
 					console.log(res) //手机型号
 					if(res.platform.indexOf("ios") != -1){
 						console.log("ios")

@@ -34,7 +34,8 @@
 		data() {
 			return {
 				account:'',
-				password:''
+				password:'',
+				phoneModel: 0, //1为安卓，2为IOS
 			}
 		},
 		onLoad() {
@@ -44,6 +45,19 @@
 			// 	// 直接登录
 			// 	this.loginByToken(em_token)
 			// }
+			var _self = this
+			uni.getSystemInfo({
+				success: (res) => {
+					console.log(res) //手机型号
+					if(res.platform == 'ios'){
+						console.log("ios")
+						_self.phoneModel = 2
+					}else if(res.platform == 'android'){
+						console.log("android")
+						_self.phoneModel = 1
+					}
+				}
+			});
 		},
 		computed:{
 			...mapState({
@@ -68,6 +82,7 @@
 			loginByToken(em_token){
 				var _self = this
 				_self.$H.post('/api/Employee/ValidateToken',{
+					OsType: _self.phoneModel,
 					token:em_token
 				}).then(res=>{
 					console.log(res)
@@ -97,6 +112,7 @@
 				console.log(_self.account, _self.password)
 				uni.showLoading({title: '登录中...'})
 				_self.$H.post('/api/Employee/login',{
+					OsType: _self.phoneModel,
 					account:_self.account,
 					password:_self.$md5(_self.password),
 					UniPushClientID:_self.clientid,

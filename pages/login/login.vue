@@ -103,17 +103,18 @@
 				codeClick: true,
 				infoList: '',
 				accountInfo: '',
-				phoneModel: 1, //1为安卓，2为IOS
+				phoneModel: 0, //1为安卓，2为IOS
 			}
 		},
 		onLoad() {
+			var _self = this
 			uni.getSystemInfo({
-				success(res) {
+				success: (res) => {
 					console.log(res) //手机型号
-					if(res.platform.indexOf("ios") != -1){
+					if(res.platform == 'ios'){
 						console.log("ios")
 						_self.phoneModel = 2
-					}else if(res.platform.indexOf("android") != -1){
+					}else if(res.platform == 'android'){
 						console.log("android")
 						_self.phoneModel = 1
 					}
@@ -123,7 +124,7 @@
 			console.log(m_token)
 			if(m_token != ''){
 				// 直接登录
-				this.loginByToken(m_token)
+				_self.loginByToken(m_token)
 			}
 		},
 		computed:{
@@ -195,7 +196,6 @@
 				var _self = this
 				console.log("Mobilephone:"+_self.phone)
 				_self.$H.post('/api/merchant/GetAccountsByMobilephone',{
-					OsType: _self.phoneModel,
 					Mobilephone:_self.phone,
 					Code:_self.phoneCode
 				}).then(res=>{
@@ -282,6 +282,7 @@
 				console.log(_self.phone, _self.phoneCode, _self.accountInfo.ID, _self.uuid)
 				uni.showLoading({title: '登录中...'})
 				_self.$H.post('/api/merchant/LoginByMobilephoneCode',{
+					OsType: _self.phoneModel,
 					Mobilephone:_self.phone,
 					MobilephoneCode:_self.phoneCode,
 					ID:_self.accountInfo.ID,
